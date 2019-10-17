@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserAuthService } from './services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { UserAuthService } from './services/user-service.service';
 })
 export class AppComponent {
   title = 'kanban-board-app';
+  currentUser;
   fakeUsers = [
     {username: 'John Doe', password: 1111},
     {username: 'John Smith', password: 2222},
@@ -17,14 +19,19 @@ export class AppComponent {
     {username: 'Sam Anderson', password: 6666},
   ]
 
-  constructor(userAuthService: UserAuthService) {
-    // If there is some data in local storage - continue.
+  constructor(userAuthService: UserAuthService, private router: Router) {
+    this.currentUser = userAuthService.getSignedInUserFromStorage;
+    // If there is some data in local storage - skip
     if (userAuthService.getRegisteredUsersFromStorage()) {
-      console.log('if!!!!!!');
      } else {
          // If there are no users in local storage - add some fake users that will be used later in kanban logic.
          userAuthService.addFakeUsers(this.fakeUsers);
-         console.log('fakeUsers', this.fakeUsers);
      }
+  }
+
+  logout(){
+    this.currentUser = null;
+    localStorage.removeItem('currentUser');
+    return this.router.navigate(['/login']);
   }
 }
