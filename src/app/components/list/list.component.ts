@@ -3,6 +3,7 @@ import {DOCUMENT} from '@angular/common';
 import {ListInterface, List} from '../../models/list-model';
 import {Card, CardInterface} from '../../models/card-model';
 import { MovementIntf, Movement } from '../../models/movement';
+import { UserAuthService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,6 @@ import { MovementIntf, Movement } from '../../models/movement';
 })
 
 export class ListComponent implements OnInit {
-
   @Input() list: ListInterface;
   @Input() listIndex: number;
   @Output() moveCardAcrossList: EventEmitter<MovementIntf> = new EventEmitter<MovementIntf>();
@@ -19,15 +19,19 @@ export class ListComponent implements OnInit {
   @Output() deleteList: EventEmitter<number> = new EventEmitter<number>();
 
   private cardCount = 0;
-
-  constructor(private elementRef: ElementRef , @Inject(DOCUMENT) private document: Document) { }
+  public isCompleted: boolean;
+  
+  constructor(private elementRef: ElementRef , @Inject(DOCUMENT) private document: Document, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
    console.log('list component called!!');
   }
 
   addNewCard() {
-    const card = new Card(this.cardCount++ + '', 'Ticket title' + this.cardCount, 'ticket description' + this.cardCount, 'sample desc');
+    const user = this.userAuthService.getSignedInUserFromStorage();
+    const card = new Card(this.cardCount+++ '', 'Ticket title...' 
+    + this.cardCount, 'type your ticket desctiption here...' , user.username + '', 
+    'will be selected', 'white', this.isCompleted);
     console.log('card', card);
     this.list.cards.push(card);
     this.newCardAdded.emit(card);
@@ -52,7 +56,6 @@ export class ListComponent implements OnInit {
           parseInt(cardElementBeingDroppedOn.getAttribute('cardIndex'), 10);
     const listIndexDragged = parseInt(data.listIndex, 10);
     const cardIndexDragged = parseInt(data.cardIndex, 10);
-
     if (listIndexDragged === listIndexDroppedOn) {
         // same list just re-organize the cards
         const cardDragged = this.list.cards.splice(cardIndexDragged,1);
@@ -60,6 +63,11 @@ export class ListComponent implements OnInit {
     } else {
       this.moveCardAcrossList.emit(new Movement(listIndexDragged, listIndexDroppedOn , cardIndexDragged , cardIndexDroppedOn));
     }
+  }
+
+  markCompleted() {
+    console.log('markCompleted()!!!');
+    
   }
 
 }
