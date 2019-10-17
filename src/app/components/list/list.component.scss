@@ -2,17 +2,14 @@
     background-color: #F5F5F5;
     margin: 0px;
     padding: 5px;
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
-    border-top: solid 5px blue;
-    max-width: 270px;
-    
+    border-top: solid 5px rgb(166, 255, 0);
+    max-width: 350px;
+    height:100%;
   }
   
   .text-center.add-new-card:hover {
     opacity:0.9;
     color:#767676;
-  
   }
   
   .text-center.add-new-card {
@@ -29,6 +26,5 @@
   }
   
   .list{
-    background-color: #e7e9ea;
-  
+    background-color: #e4ebee;
   }

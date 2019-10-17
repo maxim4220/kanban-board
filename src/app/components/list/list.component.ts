@@ -4,15 +4,11 @@ import {ListInterface, List} from '../../models/list-model';
 import {Card, CardInterface} from '../../models/card-model';
 import { MovementIntf, Movement } from '../../models/movement';
 
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-
-
-
 
 export class ListComponent implements OnInit {
 
@@ -27,15 +23,15 @@ export class ListComponent implements OnInit {
   constructor(private elementRef: ElementRef , @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
-
+   console.log('list component called!!');
   }
 
   addNewCard() {
-    const card = new Card(this.cardCount++ + '', 'header' + this.cardCount, 'summary' + this.cardCount, 'sample desc');
+    const card = new Card(this.cardCount++ + '', 'Ticket title' + this.cardCount, 'ticket description' + this.cardCount, 'sample desc');
+    console.log('card', card);
     this.list.cards.push(card);
     this.newCardAdded.emit(card);
   }
-
 
   allowCardReplacement(dragEvent: DragEvent) {
     dragEvent.dataTransfer.dropEffect = 'move';
@@ -44,9 +40,7 @@ export class ListComponent implements OnInit {
 
   delete(){
     this.deleteList.emit(this.listIndex);
-  
   }
-
 
   dropCard(dragEvent: DragEvent) {
     const data = JSON.parse(dragEvent.dataTransfer.getData('text'));
@@ -66,9 +60,6 @@ export class ListComponent implements OnInit {
     } else {
       this.moveCardAcrossList.emit(new Movement(listIndexDragged, listIndexDroppedOn , cardIndexDragged , cardIndexDroppedOn));
     }
-
   }
 
-
-  
 }
