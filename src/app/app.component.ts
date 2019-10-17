@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { UserAuthService } from './services/user-service.service';
 import { Router } from '@angular/router';
 
@@ -19,8 +19,9 @@ export class AppComponent {
     {username: 'Sam Anderson', password: 6666},
   ]
 
-  constructor(userAuthService: UserAuthService, private router: Router) {
-    this.currentUser = userAuthService.getSignedInUserFromStorage;
+  constructor(private userAuthService: UserAuthService, private router: Router) {
+  //  this.currentUser = userAuthService.currentUserValue();
+  this.currentUser = userAuthService.currentUserSubject.subscribe(x => this.currentUser = x);
     // If there is some data in local storage - skip
     if (userAuthService.getRegisteredUsersFromStorage()) {
      } else {
@@ -30,8 +31,7 @@ export class AppComponent {
   }
 
   logout(){
-    this.currentUser = null;
-    localStorage.removeItem('currentUser');
-    return this.router.navigate(['/login']);
+    this.userAuthService.logout();
   }
+
 }
