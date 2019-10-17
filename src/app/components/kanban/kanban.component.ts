@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-kanban',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KanbanComponent implements OnInit {
   boardCreated = false;
+  user: any;
 
-  constructor() { }
+  constructor(userAuthService:UserAuthService) { 
+    this.user = userAuthService.getUserFromStorage();
+  }
 
   ngOnInit() {
   }
