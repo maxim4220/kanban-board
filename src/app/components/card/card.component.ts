@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Card} from '../../models/card-model';
+import { UserAuthService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-card-summary',
@@ -7,18 +8,23 @@ import {Card} from '../../models/card-model';
   styleUrls: ['./card.component.scss']
 })
 export class SummaryComponent implements OnInit {
-
+  colorArray = ['White', 'Aqua', 'GreenYellow', 'LightPink '];
+  usersArray = [];
+  public assignTo = [];
+  color = '';
   @Input() card: Card;
   @Input() listIndex: number;
   @Input() cardIndex: number;
 
-  constructor() { }
+  constructor(userAuthService: UserAuthService) {
+    this.usersArray = userAuthService.getRegisteredUsersFromStorage();
+   }
 
   ngOnInit() {
+   
   }
 
   identifyCardBeingDragged(dragEvent: DragEvent) {
-    console.log('dragEvent', dragEvent);
     dragEvent.dataTransfer.effectAllowed = 'move'
     dragEvent.dataTransfer.dropEffect= 'move'
     const transferObject = {
