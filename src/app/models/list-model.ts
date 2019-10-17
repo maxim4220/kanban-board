@@ -1,26 +1,20 @@
-import {Card, CardInterface} from '../models/card-model';
+import {CardInterface} from './card-model';
 
 export interface ListInterface {
   id: string;
   name: string;
   position: number;
   cards: CardInterface[];
-
 }
 
-
 export class List implements ListInterface {
-
   cards: CardInterface[] = [];
   id: string;
   name: string;
   position: number;
 
-
   constructor() {
   }
-
-
 
   addCard(card: CardInterface) {
     if (this.isCardEmpty()) {
@@ -34,11 +28,10 @@ export class List implements ListInterface {
       return null;
     }
     const cardIndex = this.cards.findIndex(x => x.id === id);
-    if ( cardIndex > -1 ) {
+    if (cardIndex > -1) {
       const cardInterfaces = this.cards.splice(cardIndex, 1);
       return cardInterfaces[0];
     }
-
     return null;
 
   }

@@ -1,26 +1,28 @@
-<div class="card" [draggable]="'true'" (dragstart)="identifyCardBeingDragged($event)" 
- id="list-{{listIndex}}-card-{{cardIndex}}" attr.listIndex="{{listIndex}}" attr.cardIndex="{{cardIndex}}"
-  (dragover)="allowCardDragToBeDropped($event)">
-    <div [ngClass]="{'ap-task-red': card.color =='red', 'ap-task-blue': card.color =='blue', 'ap-task-green': card.color =='green', 'ap-task-aqua': card.color =='aqua'}" 
+<div class="card" [draggable]="'true'" (dragstart)="identifyCardBeingDragged($event)"
+     id="list-{{listIndex}}-card-{{cardIndex}}" attr.listIndex="{{listIndex}}" attr.cardIndex="{{cardIndex}}"
+     (dragover)="allowCardDragToBeDropped($event)">
+  <div
+    [ngClass]="{'ap-task-red': card.color =='red', 'ap-task-blue': card.color =='blue', 'ap-task-green': card.color =='green', 'ap-task-aqua': card.color =='aqua'}"
     class="card-body">
-      <h1 class="card-title mb-1" [(appContentEdit)]="card.header" [draggable]="'false'" >  </h1>
-      <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'" ></h2>
-      <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'" >Created By:{{card.createdBy}}</h2>
-      <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'" >Assigned To:{{card.assignedTo}}</h2>
-      <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.header"  [draggable]="'false'" >Assigned To:{{card.assignedTo}}</h2>
-      <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.color"  [draggable]="'false'" > </h2>
-      <!-- name="color" [(ngModel)]="color" -->
-      <select > 
-          <option disabled selected>select ticket color...</option>
-            <option [(appContentEdit)]="card.color" *ngFor="let color of colorArray" [value] ="color">{{color}}</option>
-      </select>
-      <select > 
-          <option disabled selected> assign the task to</option>
-            <option  *ngFor="let user of usersArray" [value] ="user">{{user.username}}</option>
-      </select>
-      <!-- <label for="comment-text">Leave your comment</label>
-      <textarea id="comment-text" rows="3" cols="25">
-      </textarea> -->
-      <button  class="btn btn-sm btn-success mb-2" [draggable]="'false'" >Mark completed</button>
-    </div>
+    <h1 class="card-title mb-1" [(appContentEdit)]="card.header" [draggable]="'false'"></h1>
+    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'"></h2>
+    <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'">Created By:{{card.createdBy}}</h2>
+    <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'">Assigned To:{{card.assignedTo}}</h2>
+    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.header" [draggable]="'false'">Assigned
+      To:{{card.assignedTo}}</h2>
+    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.color" [draggable]="'false'"></h2>
+    <!-- name="color" [(ngModel)]="color" -->
+    <select>
+      <option disabled selected>select ticket color...</option>
+      <option [(appContentEdit)]="card.color" *ngFor="let color of colorArray" [value]="color">{{color}}</option>
+    </select>
+    <select>
+      <option disabled selected> assign the task to</option>
+      <option *ngFor="let user of usersArray" [value]="user">{{user.username}}</option>
+    </select>
+    <!-- <label for="comment-text">Leave your comment</label>
+    <textarea id="comment-text" rows="3" cols="25">
+    </textarea> -->
+    <button class="btn btn-sm btn-success mb-2" [draggable]="'false'">Mark completed</button>
   </div>
+</div>

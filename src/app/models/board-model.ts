@@ -1,5 +1,4 @@
-import {Card, CardInterface} from '../models/card-model';
-import {ListInterface} from '../models/list-model';
+import {ListInterface} from './list-model';
 
 export interface BoardInterface {
   id: string;
@@ -7,7 +6,6 @@ export interface BoardInterface {
   lists: ListInterface[];
 
 }
-
 
 export class BoardModel implements BoardInterface {
 

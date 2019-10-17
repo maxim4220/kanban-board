@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef, Input, EventEmitter, Output, OnInit, Renderer2 } from '@angular/core';
+import {Directive, HostListener, ElementRef, Input, EventEmitter, Output, OnInit, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[appContentEdit]'
@@ -21,13 +21,13 @@ export class ContentEditDirective implements OnInit {
 
   // if you press enter then move out of editable mode
 
-  @HostListener('keydown.enter', [] )
+  @HostListener('keydown.enter', [])
   exitContentEditable($event) {
     this.el.nativeElement.blur();
     return false;
   }
 
-  @HostListener('keydown.escape', [] )
+  @HostListener('keydown.escape', [])
   exitContentEditableWithoutChanges($event) {
     this.ignoreChange = true;
     this.el.nativeElement.blur();
@@ -52,15 +52,13 @@ export class ContentEditDirective implements OnInit {
   }
 
 
-
-
   makeContentEditable() {
-      this.renderer2.appendChild( this.el.nativeElement, this.renderer2.createText(this.appContentEdit));
-      this.renderer2.listen(this.el.nativeElement, 'dblclick', () => {
-        this.renderer2.setAttribute(this.el.nativeElement, 'contenteditable', 'true');
-        this.renderer2.addClass(this.el.nativeElement, 'inline-edit');
-        this.el.nativeElement.focus();
-      });
+    this.renderer2.appendChild(this.el.nativeElement, this.renderer2.createText(this.appContentEdit));
+    this.renderer2.listen(this.el.nativeElement, 'dblclick', () => {
+      this.renderer2.setAttribute(this.el.nativeElement, 'contenteditable', 'true');
+      this.renderer2.addClass(this.el.nativeElement, 'inline-edit');
+      this.el.nativeElement.focus();
+    });
 
   }
 

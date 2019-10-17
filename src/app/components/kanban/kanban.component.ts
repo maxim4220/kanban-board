@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from '../../services/user-service.service';
+import {Component, OnInit} from '@angular/core';
+import {UserAuthService} from '../../services/user-service.service';
 
 @Component({
   selector: 'app-kanban',
@@ -10,7 +10,7 @@ export class KanbanComponent implements OnInit {
   boardCreated = false;
   user: any;
 
-  constructor(userAuthService:UserAuthService) { 
+  constructor(userAuthService: UserAuthService) {
     this.user = userAuthService.getSignedInUserFromStorage();
   }
 
@@ -18,7 +18,7 @@ export class KanbanComponent implements OnInit {
   }
 
   createBoard() {
-    return this.boardCreated = this.boardCreated ? false : true;
+    return this.boardCreated = !this.boardCreated;
   }
 
 }
