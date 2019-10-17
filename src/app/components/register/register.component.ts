@@ -47,9 +47,7 @@ export class RegisterComponent implements OnInit {
      return;
    }
    this.loading = true;
-   console.log('user register!', this.f.username.value, this.f.password.value);
    const user = Object.assign({username: this.f.username.value}, {password: this.f.password.value});
-   console.log('user', user);
    this.userAuthService.register(user);
    this.loading = false;
    return this.router.navigate(['/login']);
