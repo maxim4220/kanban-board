@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
+public currentUserSubject: BehaviorSubject<any>;
+  constructor(private router: Router) { 
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+  }
 
-  constructor() { }
+  public get currentUserValue() {
+    return this.currentUserSubject.value;
+  }
 
  getRegisteredUsersFromStorage() {
   return JSON.parse(localStorage.getItem('usersRegistered'));
@@ -16,11 +24,16 @@ export class UserAuthService {
  }
 
  logout() {
-  return localStorage.removeItem('currentUser');
+  localStorage.removeItem('currentUser');
+  this.currentUserSubject.next(null);
+  return this.router.navigate(['/login']);
+   
  }
 
  login(user) {
-  return localStorage.setItem('currentUser', JSON.stringify(user));
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  this.currentUserSubject.next(user);
+  return this.router.navigate(['/kanban-board']);
  }
 
  addFakeUsers(users) {
