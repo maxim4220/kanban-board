@@ -11,7 +11,7 @@ export class KanbanComponent implements OnInit {
   user: any;
 
   constructor(userAuthService:UserAuthService) { 
-    this.user = userAuthService.getUserFromStorage();
+    this.user = userAuthService.getSignedInUserFromStorage();
   }
 
   ngOnInit() {
