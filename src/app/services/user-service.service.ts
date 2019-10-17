@@ -7,8 +7,12 @@ export class UserAuthService {
 
   constructor() { }
 
- getUserFromStorage() {
-  return JSON.parse(localStorage.getItem('user'));
+ getRegisteredUsersFromStorage() {
+  return JSON.parse(localStorage.getItem('usersRegistered'));
+ }
+
+ getSignedInUserFromStorage() {
+  return JSON.parse(localStorage.getItem('currentUser'));
  }
 
  logout() {
@@ -16,10 +20,17 @@ export class UserAuthService {
  }
 
  login() {
+
+ }
+
+ addFakeUsers(users) {
+  return localStorage.setItem('usersRegistered', JSON.stringify(users));
  }
 
  register(user) {
-  return localStorage.setItem('user', JSON.stringify(user));
+  const users = this.getRegisteredUsersFromStorage();
+  users.push(user);
+  return localStorage.setItem('usersRegistered', JSON.stringify(users));
  }
 
 }
