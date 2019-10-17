@@ -30,12 +30,15 @@ export class BoardComponent implements OnInit {
 
   addList() {
     const newList: ListInterface = new List();
+    console.log('newList', newList);
     newList.position = this.lists.length + 1;
-    newList.name = `List #${newList.position}`;
+    newList.name = `Column #${newList.position}`;
     if (this.lists === undefined) {
+      console.log('this.lists', this.lists)
       this.lists = [];
     }
     this.lists.push(newList);
+    console.log('this.lists',this.lists);
   }
 
   moveCardAcrossList(movementInformation: MovementIntf) {
