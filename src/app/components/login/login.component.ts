@@ -1,19 +1,16 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserAuthService} from '../../services/user-service.service';
 import swal from 'sweetalert2';
 
 @Component({templateUrl: 'login.component.html'})
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
  loginForm: FormGroup;
  loading = false;
  submitted = false;
  error: string;
  constructor(
    private formBuilder: FormBuilder,
-   private route: ActivatedRoute,
-   private router: Router,
    private userAuthService: UserAuthService
  ) {
    // redirect to home if already logged in
@@ -38,13 +35,11 @@ export class LoginComponent implements OnInit, OnDestroy {
      return;
    }
    this.loading = true;
-
     const registeredUsers =  this.userAuthService.getRegisteredUsersFromStorage();
     const user = Object.assign({username: this.f.username.value}, {password: this.f.password.value});
     const res = registeredUsers.find(val => val.username == user.username);
     if(res && res.password == user.password) {
       this.userAuthService.login(user);
-      return this.router.navigate(['/kanban-board']);
     } else {
       // User not found - show notification!!
       swal.fire({
@@ -53,11 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         text: 'Looks like your username or password is wrong!',
       })
     }
- 
+
     this.loading = false;
  }
 
- ngOnDestroy() {
- }
 
 }
