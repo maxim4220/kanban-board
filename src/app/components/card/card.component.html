@@ -3,7 +3,7 @@
   (dragover)="allowCardDragToBeDropped($event)">
     <div [ngClass]="{'ap-task-red': card.color =='red', 'ap-task-blue': card.color =='blue', 'ap-task-green': card.color =='green', 'ap-task-aqua': card.color =='aqua'}" 
     class="card-body">
-      <h1 class="card-title" [(appContentEdit)]="card.header" [draggable]="'false'" >  </h1>
+      <h1 class="card-title mb-1" [(appContentEdit)]="card.header" [draggable]="'false'" >  </h1>
       <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'" ></h2>
       <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'" >Created By:{{card.createdBy}}</h2>
       <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'" >Assigned To:{{card.assignedTo}}</h2>
