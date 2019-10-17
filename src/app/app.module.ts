@@ -10,7 +10,8 @@ import { SummaryComponent } from './components/card/card.component';
 import { ContentEditDirective } from '../app/directives/content-edit.directive';
 import { ContextMenuComponent } from './components/context/context-menu.component/context-menu.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component'
+import { RegisterComponent } from './components/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RegisterComponent } from './components/register/register.component'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
