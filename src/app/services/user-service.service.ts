@@ -16,11 +16,11 @@ export class UserAuthService {
  }
 
  logout() {
-  return localStorage.removeItem('user');
+  return localStorage.removeItem('currentUser');
  }
 
- login() {
-
+ login(user) {
+  return localStorage.setItem('currentUser', JSON.stringify(user));
  }
 
  addFakeUsers(users) {
