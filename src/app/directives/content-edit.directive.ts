@@ -1,11 +1,10 @@
-import { Directive, HostListener, ElementRef, Renderer, Input, EventEmitter, Output, OnInit, Renderer2 } from '@angular/core';
+import { Directive, HostListener, ElementRef, Input, EventEmitter, Output, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appContentEdit]'
 })
+
 export class ContentEditDirective implements OnInit {
-
-
 
   @Input() appContentEdit: string;
   @Output() appContentEditChange: EventEmitter<string> = new EventEmitter<string>();
