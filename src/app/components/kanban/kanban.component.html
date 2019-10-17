@@ -1,9 +1,10 @@
 <h1 id="ap-kanban-title">Welcome to Kanban board application!</h1>
-
 <ng-container *ngIf="!boardCreated; else elseBlock;">
-        <button (click)="createBoard()" type="button" class="btn btn-success">Create new Kanban board!</button>
+        <button (click)="createBoard()" type="button" class="btn btn-success">Create/ restore Kanban board!</button>
 </ng-container>
-
 <ng-template #elseBlock>
         <button (click)="createBoard()" type="button" class="btn btn-danger">Remove Kanban board!</button>
+        <div class="ap-board-container mt-2">
+                <app-board></app-board>
+        </div>
 </ng-template>
