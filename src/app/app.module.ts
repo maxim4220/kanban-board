@@ -8,7 +8,9 @@ import { BoardComponent } from './components/board/board.component';
 import { ListComponent } from './components/list/list.component';
 import { SummaryComponent } from './components/card/card.component';
 import { ContentEditDirective } from '../app/directives/content-edit.directive';
-import { ContextMenuComponent } from './components/context/context-menu.component/context-menu.component'
+import { ContextMenuComponent } from './components/context/context-menu.component/context-menu.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ContextMenuComponent } from './components/context/context-menu.componen
     ListComponent,
     SummaryComponent,
     ContentEditDirective,
-    ContextMenuComponent
+    ContextMenuComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
