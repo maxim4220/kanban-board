@@ -3,12 +3,16 @@ export interface CardInterface {
     id: string;
     header: string;
     summary: string;
-    description: string;
+    createdBy: string;
+    assignedTo: string;
+    color: string,
+    isCompleted: boolean
   }
   
   export class Card implements CardInterface {
   
-    constructor(public id: string, public header: string, public summary: string, public description: string) {
+    constructor(public id: string, public header: string, public summary: string,   public createdBy: string,
+     public assignedTo: string, public color: string,public isCompleted: boolean) {
     }
-  
+    
   }
