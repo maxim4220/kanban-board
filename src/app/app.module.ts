@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
 import { BoardComponent } from './components/board/board.component';
 import { ListComponent } from './components/list/list.component';
-import { CardComponent } from './components/card/card.component';
+import { SummaryComponent } from './components/card/card.component';
+import { ContentEditDirective } from '../app/directives/content-edit.directive';
+import { ContextMenuComponent } from './components/context/context-menu.component/context-menu.component'
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { CardComponent } from './components/card/card.component';
     KanbanComponent,
     BoardComponent,
     ListComponent,
-    CardComponent
+    SummaryComponent,
+    ContentEditDirective,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,
