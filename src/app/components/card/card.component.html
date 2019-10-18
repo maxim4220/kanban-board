@@ -2,27 +2,22 @@
      id="list-{{listIndex}}-card-{{cardIndex}}" attr.listIndex="{{listIndex}}" attr.cardIndex="{{cardIndex}}"
      (dragover)="allowCardDragToBeDropped($event)">
   <div
-    [ngClass]="{'ap-task-red': card.color =='red', 'ap-task-blue': card.color =='blue', 'ap-task-green': card.color =='green', 'ap-task-aqua': card.color =='aqua'}"
+    [ngClass]="{'ap-task-blue ': card.color =='blue', 'ap-task-white': card.color =='white', 'ap-task-greenYellow': card.color =='greenYellow', 'ap-task-aqua': card.color =='aqua'}"
     class="card-body">
-    <h1 class="card-title mb-1" [(appContentEdit)]="card.header" [draggable]="'false'"></h1>
-    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'"></h2>
-    <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'">Created By:{{card.createdBy}}</h2>
-    <h2 class="text-muted card-subtitle mb-2" [draggable]="'false'">Assigned To:{{card.assignedTo}}</h2>
-    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.header" [draggable]="'false'">Assigned
-      To:{{card.assignedTo}}</h2>
-    <h2 class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.color" [draggable]="'false'"></h2>
-    <!-- name="color" [(ngModel)]="color" -->
-    <select>
-      <option disabled selected>select ticket color...</option>
-      <option [(appContentEdit)]="card.color" *ngFor="let color of colorArray" [value]="color">{{color}}</option>
-    </select>
-    <select>
-      <option disabled selected> assign the task to</option>
-      <option *ngFor="let user of usersArray" [value]="user">{{user.username}}</option>
-    </select>
-    <!-- <label for="comment-text">Leave your comment</label>
-    <textarea id="comment-text" rows="3" cols="25">
-    </textarea> -->
-    <button class="btn btn-sm btn-success mb-2" [draggable]="'false'">Mark completed</button>
+    <h1 class="card-title mb-2" [(appContentEdit)]="card.header" [draggable]="'false'"></h1>
+    <p class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'"></p>
+    <p class="text-muted card-subtitle mb-2" [draggable]="'false'">Created By:{{card.createdBy}}</p>
+    <p class="text-muted card-subtitle mb-2" [draggable]="'false'">Assigned To:{{card.assignedTo}}</p>
+    <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="selectColor()">select color</button>
+    <button (click)="assignTicket()" class="btn btn-sm btn-info mr-2 mb-2">Assign to..</button>
+    <button class="btn btn-sm btn-warning mr-2 mb-2" (click)="addComment()">Add comment</button>
+    <button *ngIf="!card.isCompleted; else completedBlock" (click)="markCompleted()" class="ap-complete btn btn-sm btn-success mb-2" [draggable]="'false'">Mark completed</button>
+    <ng-template #completedBlock> <button class="btn btn-sm btn-info mb-2">Task completed!</button></ng-template>
+    <ng-container *ngIf="card.comments">
+        Comments:
+    </ng-container>
+    <ng-container *ngFor="let comment of card.comments; let i = index">
+      <p  class="text-muted card-subtitle mb-2 ml-{{i}}" [draggable]="'false'">{{i+1}}.{{comment}}</p>
+    </ng-container>
   </div>
 </div>
