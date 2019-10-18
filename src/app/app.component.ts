@@ -19,13 +19,13 @@ export class AppComponent {
   ];
 
   constructor(private userAuthService: UserAuthService) {
-    //  this.currentUser = userAuthService.currentUserValue();
-    this.currentUser = userAuthService.currentUserSubject.subscribe(x => this.currentUser = x);
+   this.currentUser =  userAuthService.getSignedInUserFromStorage();
+   userAuthService.currentUserSubject.subscribe(x => this.currentUser = x);
     // If there is some data in local storage - skip
     if (userAuthService.getRegisteredUsersFromStorage()) {
     } else {
       // If there are no users in local storage - add some fake users that will be used later in kanban logic.
-      userAuthService.addFakeUsers(this.fakeUsers);
+      this.userAuthService.addFakeUsers(this.fakeUsers);
     }
   }
 
