@@ -9,6 +9,7 @@ import {UserAuthService} from './services/user-service.service';
 export class AppComponent {
   title = 'kanban-board-app';
   currentUser;
+  currencies = ['USD', 'EUR', 'GDP']
   fakeUsers = [
     {username: 'John Doe', password: 1111},
     {username: 'John Smith', password: 2222},

@@ -18,7 +18,6 @@ export class SummaryComponent implements OnInit {
   constructor(userAuthService: UserAuthService) {
     this.usersArray = userAuthService.getRegisteredUsersFromStorage();
     this.currentUser = userAuthService.currentUserSubject.value;
-    console.log('this.currentUser!!!', this.currentUser);
   }
 
   ngOnInit() {

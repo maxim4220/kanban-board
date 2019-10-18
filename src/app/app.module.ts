@@ -11,8 +11,7 @@ import {ContentEditDirective} from './directives/content-edit.directive';
 import {ContextMenuComponent} from './components/context/context-menu.component/context-menu.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

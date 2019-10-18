@@ -13,13 +13,16 @@ describe('LoginComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+//   describe('LoginComponent', () => {
+//     it('should create an instance of LoginComponent',() => {
+//         expect(LoginComponent).toBeTruthy();
+//     });
+// })
+
 });

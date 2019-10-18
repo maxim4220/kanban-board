@@ -27,7 +27,6 @@ export class BoardComponent implements OnInit {
 
   addList() {
     const newList: ListInterface = new List();
-    console.log('newList', newList);
     newList.position = this.lists.length + 1;
     newList.name = `Column #${newList.position} double click to change`;
     this.lists.push(newList);
