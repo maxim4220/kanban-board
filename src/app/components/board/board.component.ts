@@ -22,19 +22,22 @@ export class BoardComponent implements OnInit {
     const board = this.localService.getBoard();
     this.lists = board.lists || [];
     // ideally retrieve and initialize from some storage.
+    setInterval(() => { this.saveBoard(); }, 3000);
   }
 
   addList() {
     const newList: ListInterface = new List();
     console.log('newList', newList);
     newList.position = this.lists.length + 1;
-    newList.name = `Column #${newList.position}`;
+    newList.name = `Column #${newList.position} double click to change`;
     this.lists.push(newList);
+    this.saveBoard();
   }
 
   moveCardAcrossList(movementInformation: MovementIntf) {
     const cardMoved = this.lists[movementInformation.fromListIdx].cards.splice(movementInformation.fromCardIdx, 1);
     this.lists[movementInformation.toListIdx].cards.splice(movementInformation.toCardIdx, 0, ...cardMoved);
+    this.saveBoard();
   }
 
   saveBoard() {
@@ -45,5 +48,6 @@ export class BoardComponent implements OnInit {
 
   deleteList(listIndex: number) {
     this.lists.splice(listIndex, 1);
+    this.saveBoard();
   }
 }
