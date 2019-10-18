@@ -30,9 +30,9 @@ export class ListComponent implements OnInit {
 
   addNewCard() {
     const user = this.userAuthService.getSignedInUserFromStorage();
-    const card = new Card(this.cardCount++ + '', 'Ticket title...'
-      + this.cardCount, 'type your ticket description here...', user.username + '',
-      'will be selected', 'white', this.isCompleted);
+    const card = new Card(this.cardCount++ + '', 'Double click to change title'
+      + this.cardCount, 'Double click to change description', user.username + '',
+      'not assigned', 'white', this.isCompleted);
     console.log('card', card);
     this.list.cards.push(card);
     this.newCardAdded.emit(card);
@@ -65,6 +65,5 @@ export class ListComponent implements OnInit {
       this.moveCardAcrossList.emit(new Movement(listIndexDragged, listIndexDroppedOn, cardIndexDragged, cardIndexDroppedOn));
     }
   }
-
 
 }
