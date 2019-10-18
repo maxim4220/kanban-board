@@ -16,12 +16,6 @@ export class List implements ListInterface {
   constructor() {
   }
 
-  addCard(card: CardInterface) {
-    if (this.isCardEmpty()) {
-      this.cards = [];
-    }
-    this.cards.push(card);
-  }
 
   removeCard(id: string): CardInterface {
     if (this.isCardEmpty()) {

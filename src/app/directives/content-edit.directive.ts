@@ -14,7 +14,6 @@ export class ContentEditDirective implements OnInit {
   constructor(private el: ElementRef, private renderer2: Renderer2) {
   }
 
-
   ngOnInit(): void {
     this.makeContentEditable();
   }
@@ -51,7 +50,6 @@ export class ContentEditDirective implements OnInit {
     this.renderer2.removeClass(this.el.nativeElement, 'inline-edit');
   }
 
-
   makeContentEditable() {
     this.renderer2.appendChild(this.el.nativeElement, this.renderer2.createText(this.appContentEdit));
     this.renderer2.listen(this.el.nativeElement, 'dblclick', () => {
@@ -59,8 +57,5 @@ export class ContentEditDirective implements OnInit {
       this.renderer2.addClass(this.el.nativeElement, 'inline-edit');
       this.el.nativeElement.focus();
     });
-
   }
-
-
 }
