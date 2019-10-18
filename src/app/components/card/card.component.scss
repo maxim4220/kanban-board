@@ -7,7 +7,7 @@
 }
 
 .card-title {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .card-body {
@@ -15,20 +15,20 @@
 }
 
 .text-muted {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 // styles will be applied in ngClass in template
-.ap-task-red {
-  border-top: solid 6px red;
+.ap-task-white {
+  border-top: solid 6px white;
 }
 
-.ap-task-blue {
-  border-top: solid 6px blue;
+.ap-task-blue  {
+  border-top: solid 6px blue ;
 }
 
-.ap-task-green {
-  border-top: solid 6px green;
+.ap-task-greenYellow {
+  border-top: solid 6px greenYellow;
 }
 
 .ap-task-aqua {
