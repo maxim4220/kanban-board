@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { RouterTestingModule } from '@angular/router/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -12,6 +14,7 @@ describe('LoginComponent', () => {
   let userAuthService: UserAuthService;
   let spy: jasmine.Spy;
   let mockUser;
+  let submitEl: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -26,6 +29,7 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
+    submitEl =fixture.debugElement.query(By.css('button'));
 
     userAuthService = fixture.debugElement.injector.get(UserAuthService);
     mockUser = {name: 'John'};
@@ -63,4 +67,9 @@ it('submitting a form emits a user',() => {
         expect(spy.calls.any()).toBe(false);
     });
 
+    it('Setting loading to false disables the submit button',() => {
+      component.loading = false;
+      fixture.detectChanges();
+      expect(submitEl.nativeElement.disabled).toBe(false);
+  });
 });
