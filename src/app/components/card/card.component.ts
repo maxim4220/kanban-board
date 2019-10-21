@@ -119,9 +119,10 @@ export class SummaryComponent implements OnInit {
   }
 
   addNestedComment(comment) {  
+    console.log('comment', comment);
     (async () => {
       const {value: text} = await swal.fire({
-        title: comment.comment.toString(),
+        title: 'add Review to comment',
         input: 'textarea',
         inputPlaceholder: 'Type your review for this commnent here...',
         inputAttributes: {
@@ -130,7 +131,13 @@ export class SummaryComponent implements OnInit {
         showCancelButton: true
       });
       if (text) {
-        comment.subComments.push(text);
+        if(comment.subComments) {
+          comment.subComments.push(text);
+        } else {
+          console.log('Hello!!');
+          
+        }
+        
       }
     })();
   }
