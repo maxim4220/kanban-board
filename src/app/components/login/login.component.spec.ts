@@ -65,9 +65,16 @@ describe('LoginComponent', () => {
     expect(spy.calls.any()).toBe(false);
   });
 
-  it('Setting loading to false disables the submit button', () => {
+  it('Setting loading to false does not disable the submit button', () => {
     component.loading = false;
     fixture.detectChanges();
     expect(submitEl.nativeElement.disabled).toBe(false);
   });
+
+  it('Setting loading to true disables the submit button', () => {
+    component.loading = true;
+    fixture.detectChanges();
+    expect(submitEl.nativeElement.disabled).toBe(true);
+  });
+
 });
