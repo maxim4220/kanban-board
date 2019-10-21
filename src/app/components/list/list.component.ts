@@ -25,7 +25,6 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('list component called!!');
   }
 
   addNewCard() {
@@ -33,7 +32,6 @@ export class ListComponent implements OnInit {
     const card = new Card(this.cardCount++ + '', 'Double click to change title'
       + this.cardCount, 'Double click to change description', user.username + '',
       'not assigned', 'white', this.isCompleted);
-    console.log('card', card);
     this.list.cards.push(card);
     this.newCardAdded.emit(card);
   }
