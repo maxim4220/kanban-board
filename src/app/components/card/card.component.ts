@@ -64,10 +64,12 @@ export class SummaryComponent implements OnInit {
       if (text) {
         // swal.fire(text)
         if (this.card.comments) {
-          this.card.comments.push(text);
+          this.card.comments.push({comment: text, subComments: []} );
+          console.log(' this.card.comments',  this.card.comments);
+          
         } else {
           this.card.comments = [];
-          this.card.comments.push(text);
+          this.card.comments.push({comment: text, subComments: []} );
         }
       }
     })();
@@ -114,6 +116,22 @@ export class SummaryComponent implements OnInit {
           this.card.assignedTo = user;
         }
         return swal.fire('You have assigned this task to: ' + user);
+      }
+    })();
+  }
+
+  addNestedComment(comment) {
+    (async () => {
+      const {value: text} = await swal.fire({
+        input: 'textarea',
+        inputPlaceholder: 'Type your   sub commnent here...',
+        inputAttributes: {
+          'aria-label': 'Type your comment here'
+        },
+        showCancelButton: true
+      });
+      if (text) {
+        comment.subComments.push(text);
       }
     })();
   }

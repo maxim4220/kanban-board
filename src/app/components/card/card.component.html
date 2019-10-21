@@ -17,7 +17,10 @@
         Comments:
     </ng-container>
     <ng-container *ngFor="let comment of card.comments; let i = index">
-      <p  class="text-muted card-subtitle mb-2 ml-{{i}}" [draggable]="'false'">{{i+1}}.{{comment}}</p>
+      <p (click)="addNestedComment(comment)" class="mb-2 " [draggable]="'false'">{{i+1}}.{{comment.comment}}</p>
+      <ng-container *ngFor="let sub of comment.subComments; let i = index">
+         <p class="text-muted card-subtitle ml-{{i+1}}"> - {{sub}}</p>
+      </ng-container>
     </ng-container>
   </div>
 </div>
