@@ -28,5 +28,10 @@
 .list {
   background-color: #e4ebee;
   min-height: 500px;
-  min-width: 310px;
+  width: 320px;
+}
+@media only screen and (max-width: 900px) {
+  .list {
+    max-width: 200px;
+  }
 }
