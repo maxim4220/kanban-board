@@ -118,11 +118,12 @@ export class SummaryComponent implements OnInit {
     })();
   }
 
-  addNestedComment(comment) {
+  addNestedComment(comment) {  
     (async () => {
       const {value: text} = await swal.fire({
+        title: comment.comment.toString(),
         input: 'textarea',
-        inputPlaceholder: 'Type your   sub commnent here...',
+        inputPlaceholder: 'Type your review for this commnent here...',
         inputAttributes: {
           'aria-label': 'Type your comment here'
         },
