@@ -8,7 +8,7 @@ export class ConfirmPasswordValidator {
    const password = control.get('password').value;
    const confirmPassword = control.get('confirmPassword').value;
    if (password !== confirmPassword) {
-     console.log('pass dont match!');
+   //  console.log('pass dont match!');
      control.get('confirmPassword').setErrors({ConfirmPassword: true});
    } else {
      return null;

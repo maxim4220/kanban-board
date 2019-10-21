@@ -65,8 +65,6 @@ export class SummaryComponent implements OnInit {
         // swal.fire(text)
         if (this.card.comments) {
           this.card.comments.push({comment: text, subComments: []} );
-          console.log(' this.card.comments',  this.card.comments);
-          
         } else {
           this.card.comments = [];
           this.card.comments.push({comment: text, subComments: []} );
