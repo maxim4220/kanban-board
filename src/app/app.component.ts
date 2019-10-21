@@ -9,7 +9,7 @@ import {UserAuthService} from './services/user-service.service';
 export class AppComponent {
   title = 'kanban-board-app';
   currentUser;
-  currencies = ['USD', 'EUR', 'GDP']
+  currencies = ['USD', 'EUR', 'GDP'];
   fakeUsers = [
     {username: 'John Doe', password: 1111},
     {username: 'John Smith', password: 2222},
@@ -20,8 +20,8 @@ export class AppComponent {
   ];
 
   constructor(private userAuthService: UserAuthService) {
-   this.currentUser =  userAuthService.getSignedInUserFromStorage();
-   userAuthService.currentUserSubject.subscribe(x => this.currentUser = x);
+    this.currentUser = userAuthService.getSignedInUserFromStorage();
+    userAuthService.currentUserSubject.subscribe(x => this.currentUser = x);
     // If there is some data in local storage - skip
     if (userAuthService.getRegisteredUsersFromStorage()) {
     } else {

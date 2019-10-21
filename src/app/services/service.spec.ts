@@ -1,38 +1,37 @@
-import {TestBed, async, inject, fakeAsync, flush, tick} from '@angular/core/testing';
-import { UserAuthService } from './user-service.service';
+import {TestBed, async, inject, } from '@angular/core/testing';
+import {UserAuthService} from './user-service.service';
 import {Router} from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { LocalService } from './local-service';
-import { BoardService } from './board-service';
+import {RouterTestingModule} from '@angular/router/testing';
+import {LocalService} from './local-service';
+import {BoardService} from './board-service';
 
 class RouterStub {
-    navigateByUrl(url: string) {
-      return url;
-    }
+  navigateByUrl(url: string) {
+    return url;
   }
+}
 
 describe('AppComponent', () => {
-    let router = {
-        navigate: jasmine.createSpy('navigate')
-      }
-    
+  let router = {
+    navigate: jasmine.createSpy('navigate')
+  };
+
   beforeEach(async(() => {
-      
+
     TestBed.configureTestingModule({
       providers: [
-        UserAuthService, 
+        UserAuthService,
         {provide: Router, useClass: RouterStub},
         LocalService,
         BoardService
-      ], 
+      ],
       imports: [
-        RouterTestingModule,             
-    ],
-     
+        RouterTestingModule,
+      ],
+
     }).compileComponents();
   }));
 
-  
 
   it('should create user serviceservice', inject([UserAuthService], (service: UserAuthService) => {
     expect(service).toBeTruthy();
@@ -47,8 +46,8 @@ describe('AppComponent', () => {
   }));
 
   it('should return true', inject([UserAuthService], (service: UserAuthService) => {
-  //  expect(service.logout()).toHaveBeenCalledWith('/login');
-  //  tick(500);
+    //  expect(service.logout()).toHaveBeenCalledWith('/login');
+    //  tick(500);
   }));
 
 });

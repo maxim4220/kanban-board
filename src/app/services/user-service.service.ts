@@ -14,10 +14,6 @@ export class UserAuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue() {
-    return this.currentUserSubject.value;
-  }
-  
   getRegisteredUsersFromStorage() {
     return JSON.parse(localStorage.getItem('usersRegistered'));
   }

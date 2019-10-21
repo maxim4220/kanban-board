@@ -26,10 +26,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('kanban-board-app');
   });
 
-  it('should include USD as a currency', () => {
+  it('should test array', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.currencies).toContain('USD');
-  })
+  });
 
 });

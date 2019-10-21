@@ -87,7 +87,6 @@ export class SummaryComponent implements OnInit {
         showCancelButton: true,
       });
       if (color) {
-        console.log('color', color);
         this.card.color = color;
       }
     })();
