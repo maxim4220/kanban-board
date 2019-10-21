@@ -14,6 +14,7 @@ export class SummaryComponent implements OnInit {
   @Input() card: Card;
   @Input() listIndex: number;
   @Input() cardIndex: number;
+  @Input() child;
 
   constructor(userAuthService: UserAuthService) {
     this.usersArray = userAuthService.getRegisteredUsersFromStorage();
@@ -51,27 +52,6 @@ export class SummaryComponent implements OnInit {
 
   }
 
-  addComment() {
-    (async () => {
-      const {value: text} = await swal.fire({
-        input: 'textarea',
-        inputPlaceholder: 'Type your commnent here...',
-        inputAttributes: {
-          'aria-label': 'Type your comment here'
-        },
-        showCancelButton: true
-      });
-      if (text) {
-        // swal.fire(text)
-        if (this.card.comments) {
-          this.card.comments.push({comment: text, subComments: []} );
-        } else {
-          this.card.comments = [];
-          this.card.comments.push({comment: text, subComments: []} );
-        }
-      }
-    })();
-  }
 
   selectColor() {
     (async () => {
@@ -118,6 +98,29 @@ export class SummaryComponent implements OnInit {
     })();
   }
 
+
+  addComment() {
+    (async () => {
+      const {value: text} = await swal.fire({
+        input: 'textarea',
+        inputPlaceholder: 'Type your commnent here...',
+        inputAttributes: {
+          'aria-label': 'Type your comment here'
+        },
+        showCancelButton: true
+      });
+      if (text) {
+        // swal.fire(text)
+        if (this.card.comments) {
+          this.card.comments.push({comment: text, subComments: []} );
+        } else {
+          this.card.comments = [];
+          this.card.comments.push({comment: text, subComments: []} );
+        }
+      }
+    })();
+  }
+
   addNestedComment(comment) {  
     console.log('comment', comment);
     (async () => {
@@ -132,14 +135,20 @@ export class SummaryComponent implements OnInit {
       });
       if (text) {
         if(comment.subComments) {
-          comment.subComments.push(text);
+          comment.subComments.push({comment: text, subComments: []} );
         } else {
           console.log('Hello!!');
+          comment.subComments = [];
+          comment.subComments.push({comment: text, subComments: []} );
+          console.log('11', this.card.comments);
           
         }
+        console.log('this.card.comments', this.card.comments);
         
       }
     })();
   }
+
+  // Helper function 
 
 }
