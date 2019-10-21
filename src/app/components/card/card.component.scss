@@ -34,3 +34,10 @@
 .ap-task-aqua {
   border-top: solid 6px aqua;
 }
+
+@media only screen and (max-width: 900px) {
+  .card {
+    max-width: 180px;
+  }
+}
+
