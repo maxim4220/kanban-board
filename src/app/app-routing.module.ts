@@ -20,7 +20,7 @@ export const routes: Routes = [
    canActivate: [SingUpGuardService],
    component: RegisterComponent},
   {path: 'error/404', component: ErrorComponent},
-  // otherwise redirect to 404 page
+  // otherwise redirect to kanban board
    {path: '**', redirectTo: 'kanban-board'}
 ];
 
