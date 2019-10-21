@@ -5,7 +5,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: 'kanban-board', component: KanbanComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
