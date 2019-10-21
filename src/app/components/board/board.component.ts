@@ -4,7 +4,6 @@ import {MovementIntf} from '../../models/movement';
 import {BoardModel} from '../../models/board-model';
 import {LocalService} from '../../services/local-service';
 
-
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -14,14 +13,15 @@ import {LocalService} from '../../services/local-service';
 export class BoardComponent implements OnInit {
 
   lists: ListInterface[];
+  board;
 
   constructor(private localService: LocalService) {
   }
 
   ngOnInit() {
-    const board = this.localService.getBoard();
-    this.lists = board.lists || [];
     // ideally retrieve and initialize from some storage.
+    this.board = this.localService.getBoard();
+    this.lists = this.board.lists || [];
     setInterval(() => { this.saveBoard(); }, 3000);
   }
 
@@ -49,4 +49,10 @@ export class BoardComponent implements OnInit {
     this.lists.splice(listIndex, 1);
     this.saveBoard();
   }
+
+  removeBoard() {
+    this.lists = [];
+    this.saveBoard();
+  }
+
 }
