@@ -1,3 +1,9 @@
+<div class="grid-container">
+    <div class="grid-item">
+      <h5>Board settings</h5>
+      <button *ngIf="lists.length > 0" (click)=" removeBoard()" type="button" class="btn btn-danger btn-sm m-2">Clear board</button>
+    </div>
+    <div class="grid-item">
 <div class="container" >
   <div class="row" style="height:inherit;">
     <app-list class="mr-2 mt-2" *ngFor="let list of lists;let i = index" [list]="list" [listIndex]="i"
@@ -10,3 +16,6 @@
     </div>
   </div>
 </div>
+    </div>
+</div>
+
