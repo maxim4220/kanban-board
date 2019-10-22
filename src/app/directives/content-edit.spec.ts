@@ -11,26 +11,16 @@ export class TestContainerComponent {
 }
 
 describe('ContentEditDirective', () => {
-  let container;
   let fixture;
-  let result;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestContainerComponent, ContentEditDirective]
-
     });
     fixture = TestBed.createComponent(TestContainerComponent);
-    container = fixture.comonentInstance;
-    result = fixture.nativeElement.querySelector('div');
   });
 
   it('should create an instance', () => {
     const directive = new ContentEditDirective(null, null);
     expect(directive).toBeTruthy();
-  });
-  it('should test host listeners', () => {
-    const div = fixture.nativeElement.querySelector('div');
-    // div.click();
-    // expect(result.class).toEqual("inline-edit")
   });
 });
