@@ -45,6 +45,7 @@ export class ListComponent implements OnInit {
   }
 
   dropCard(dragEvent: DragEvent) {
+    console.log('dragEvent', dragEvent);
     const data = JSON.parse(dragEvent.dataTransfer.getData('text'));
     const elements: Element[] = this.document.elementsFromPoint(dragEvent.x, dragEvent.y);
     const cardElementBeingDroppedOn = elements.find(x => x.tagName.toLowerCase() === 'app-card-summary');

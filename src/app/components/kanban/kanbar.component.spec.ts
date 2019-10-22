@@ -9,6 +9,7 @@ import {ContentEditDirective} from 'src/app/directives/content-edit.directive';
 
 
 describe('AppComponent', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -25,16 +26,12 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-//   it('should create the app', () => {
-//     const fixture = TestBed.createComponent(KanbanComponent);
-//     const app = fixture.debugElement.componentInstance;
-//     expect(app).toBeTruthy();
-//   });
-
   beforeEach(async(() => {
     let fixture = TestBed.createComponent(KanbanComponent);
     let component = fixture.componentInstance;
+    const compile = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   }));
+
 
 });
