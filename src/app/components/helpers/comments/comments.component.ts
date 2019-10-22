@@ -14,8 +14,7 @@ export class CommentsComponent implements OnInit {
   ngOnInit() {
   }
 
-  addNestedComment(comment) {
-    (async () => {
+  async addNestedComment(comment) {
       const {value: text} = await swal.fire({
         title: 'add Review to comment',
         input: 'textarea',
@@ -28,6 +27,5 @@ export class CommentsComponent implements OnInit {
       if (text) {
         comment.subComments.push({comment: text, subComments: []});
       }
-    })();
   }
 }
