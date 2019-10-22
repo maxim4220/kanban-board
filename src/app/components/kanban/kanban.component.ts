@@ -7,10 +7,7 @@ import {UserAuthService} from '../../services/user-service.service';
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent implements OnInit {
-  user: any;
-
-  constructor(userAuthService: UserAuthService) {
-    this.user = userAuthService.getSignedInUserFromStorage();
+  constructor() {
   }
 
   ngOnInit() {
