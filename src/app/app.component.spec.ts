@@ -44,4 +44,17 @@ describe('AppComponent', () => {
     expect(app.currencies).toContain('USD');
   });
 
+  
+it('should check user property and be null by default', () => {
+  const fixture = TestBed.createComponent(AppComponent);
+  const app = fixture.debugElement.componentInstance;
+  expect(app.currentUser).toBe(null);
+});
+
+it('should check user property and be defined when added', () => {
+  const fixture = TestBed.createComponent(AppComponent);
+  const app = fixture.debugElement.componentInstance;
+  app.currentUser = {username: "John Doe", password: 1111};
+  expect(app.currentUser.username).toEqual("John Doe");
+});
 });
