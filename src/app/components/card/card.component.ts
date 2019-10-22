@@ -110,7 +110,6 @@ export class SummaryComponent implements OnInit {
         showCancelButton: true
       });
       if (text) {
-        // swal.fire(text)
         if (this.card.comments) {
           this.card.comments.push({comment: text, subComments: []} );
         } else {
@@ -122,7 +121,6 @@ export class SummaryComponent implements OnInit {
   }
 
   addNestedComment(comment) {  
-    console.log('comment', comment);
     (async () => {
       const {value: text} = await swal.fire({
         title: 'add Review to comment',
@@ -137,18 +135,11 @@ export class SummaryComponent implements OnInit {
         if(comment.subComments) {
           comment.subComments.push({comment: text, subComments: []} );
         } else {
-          console.log('Hello!!');
           comment.subComments = [];
           comment.subComments.push({comment: text, subComments: []} );
-          console.log('11', this.card.comments);
-          
         }
-        console.log('this.card.comments', this.card.comments);
-        
       }
     })();
   }
-
-  // Helper function 
 
 }

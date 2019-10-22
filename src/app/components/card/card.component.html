@@ -18,25 +18,8 @@
     </ng-container>
     <ng-container *ngFor="let comment of card.comments; let i = index">
       <p (click)="addNestedComment(comment)" class="mb-2 " [draggable]="'false'">{{i+1}}.{{comment.comment}}     
-        <span class="badge badge-pill badge-success">review</span></p>
-     <!-- TO DO: CREATE HELPER COMPONENT FOR THE COMMENTS! -->
-        <!-- <app-card-summary [child]="comment"></app-card-summary> -->
-      <ng-container *ngFor="let sub of comment.subComments; let i = index">
-        <p (click)="addNestedComment(sub)" class="text-muted card-subtitle  m-1"><span class="badge badge-pill badge-primary">sub:</span> {{sub.comment}} 
-           <span class="badge badge-pill badge-success">review</span></p>
-           <p *ngFor="let el of sub.subComments; let i = index" (click)="addNestedComment(el)" class="text-muted card-subtitle  m-1 ml-2"><span class="badge badge-pill badge-warning">sub:</span> {{el.comment}} 
-            <span class="badge badge-pill badge-success">review</span></p>
-            <p *ngFor="let elem of el; let i = index" (click)="addNestedComment(elem)" class="text-muted card-subtitle  m-1 ml-3"><span class="badge badge-pill badge-info">sub:</span> {{elem.comment}} 
-              <span class="badge badge-pill badge-success">review</span></p>
-      </ng-container>
+        <span class="badge badge-pill badge-success">add</span></p>
+        <app-comments [comment]="comment"></app-comments>
     </ng-container>
   </div>
 </div>
-
-
-<!-- <h2>{{ category.Title }}</h2>
-<ul *ngIf="category.Children.length > 0">
-  <li *ngFor="let child of category.Children">
-    <my-category [category]="child"></my-category>
-  </li>
-</ul> -->
