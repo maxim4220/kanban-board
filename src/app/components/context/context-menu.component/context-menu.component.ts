@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter, HostListener, ElementRef} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 
 
 @Component({

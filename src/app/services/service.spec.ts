@@ -1,4 +1,4 @@
-import {TestBed, async, inject, tick, } from '@angular/core/testing';
+import {async, inject, TestBed} from '@angular/core/testing';
 import {UserAuthService} from './user-service.service';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -12,7 +12,7 @@ class RouterStub {
 }
 
 describe('AppComponent', () => {
-  let router = {
+  const router = {
     navigate: jasmine.createSpy('navigate')
   };
 
@@ -34,13 +34,13 @@ describe('AppComponent', () => {
     };
 
     spyOn(localStorage, 'getItem')
-    .and.callFake(mockLocalStorage.getItem);
-  spyOn(localStorage, 'setItem')
-    .and.callFake(mockLocalStorage.setItem);
-  spyOn(localStorage, 'removeItem')
-    .and.callFake(mockLocalStorage.removeItem);
-  spyOn(localStorage, 'clear')
-    .and.callFake(mockLocalStorage.clear);
+      .and.callFake(mockLocalStorage.getItem);
+    spyOn(localStorage, 'setItem')
+      .and.callFake(mockLocalStorage.setItem);
+    spyOn(localStorage, 'removeItem')
+      .and.callFake(mockLocalStorage.removeItem);
+    spyOn(localStorage, 'clear')
+      .and.callFake(mockLocalStorage.clear);
 
     TestBed.configureTestingModule({
       providers: [
@@ -56,31 +56,31 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
- 
-    it('should store the test user data correctly in localStorage', inject([UserAuthService], (service: UserAuthService) =>{
-        let testUser = {username: "Sam Simons", password: 1111};
-        localStorage.setItem('usersRegistered', JSON.stringify(testUser));
-        expect(JSON.parse(localStorage.getItem('usersRegistered'))).toEqual(testUser);
-    }));
 
-    it('should return null when getting registered users from storage', inject([UserAuthService], (service: UserAuthService) =>{
-       let res =  service.getRegisteredUsersFromStorage();
-       // must be null, since no users have been added
-       expect(res).toBe(null);
+  it('should store the test user data correctly in localStorage', inject([UserAuthService], (service: UserAuthService) => {
+    const testUser = {username: 'Sam Simons', password: 1111};
+    localStorage.setItem('usersRegistered', JSON.stringify(testUser));
+    expect(JSON.parse(localStorage.getItem('usersRegistered'))).toEqual(testUser);
   }));
 
-  it('should be equal to array of fake users if fake users are added', inject([UserAuthService], (service: UserAuthService) =>{
-   let fakeUsers = [
-    {username: 'John Doe', password: 1111},
-    {username: 'John Smith', password: 2222},
-    {username: 'Alex Alex', password: 3333},
-    {username: 'Tom Smith', password: 4444},
-    {username: 'Andrew Thompson', password: 5555},
-    {username: 'Sam Anderson', password: 6666},
-  ]; 
-  service.addFakeUsers(fakeUsers);
-  let res =  service.getRegisteredUsersFromStorage();
-  expect(res).toEqual(fakeUsers);
+  it('should return null when getting registered users from storage', inject([UserAuthService], (service: UserAuthService) => {
+    const res = service.getRegisteredUsersFromStorage();
+    // must be null, since no users have been added
+    expect(res).toBe(null);
+  }));
+
+  it('should be equal to array of fake users if fake users are added', inject([UserAuthService], (service: UserAuthService) => {
+    const fakeUsers = [
+      {username: 'John Doe', password: 1111},
+      {username: 'John Smith', password: 2222},
+      {username: 'Alex Alex', password: 3333},
+      {username: 'Tom Smith', password: 4444},
+      {username: 'Andrew Thompson', password: 5555},
+      {username: 'Sam Anderson', password: 6666},
+    ];
+    service.addFakeUsers(fakeUsers);
+    const res = service.getRegisteredUsersFromStorage();
+    expect(res).toEqual(fakeUsers);
   }));
 
   it('should create user serviceservice', inject([UserAuthService], (service: UserAuthService) => {
@@ -96,8 +96,8 @@ describe('AppComponent', () => {
   }));
 
   it('should return true', inject([UserAuthService], (service: UserAuthService) => {
-      // expect(service.logout()).toHaveBeenCalledWith('/login');
-      // tick(500);
+    // expect(service.logout()).toHaveBeenCalledWith('/login');
+    // tick(500);
   }));
 
 });

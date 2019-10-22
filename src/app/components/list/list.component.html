@@ -1,10 +1,10 @@
-<div class="list col custom-col list-drag-component mr-2 ml-2" (dragover)="allowCardReplacement($event)"
-     (drop)="dropCard($event)" id="list-{{listIndex}}">
+<div (dragover)="allowCardReplacement($event)" (drop)="dropCard($event)"
+     class="list col custom-col list-drag-component mr-2 ml-2" id="list-{{listIndex}}">
   <app-context-menu (contextAction)="delete()"></app-context-menu>
-  <p class="list-name" [(appContentEdit)]="list.name"></p>
+  <p [(appContentEdit)]="list.name" class="list-name"></p>
   <div id="list-one">
-    <app-card-summary *ngFor="let card of this.list.cards;let i = index" [card]="card" [listIndex]="listIndex"
-                      [cardIndex]="i" attr.cardIndex="{{i}}"></app-card-summary>
+    <app-card-summary *ngFor="let card of this.list.cards;let i = index" [cardIndex]="i" [card]="card"
+                      [listIndex]="listIndex" attr.cardIndex="{{i}}"></app-card-summary>
   </div>
-  <h6 class="text-center add-new-card" (click)="addNewCard()">Add new ticket...</h6>
+  <h6 (click)="addNewCard()" class="text-center add-new-card">Add new ticket...</h6>
 </div>

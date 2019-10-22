@@ -1,4 +1,3 @@
-
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserAuthService} from 'src/app/services/user-service.service';
@@ -6,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import { RegisterComponent } from './register.component';
+import {RegisterComponent} from './register.component';
 
 describe('LoginComponent', () => {
   let component: RegisterComponent;
@@ -63,7 +62,7 @@ describe('LoginComponent', () => {
     // Expect to be falsy, because third input 'conform password is not filled'
     expect(component.registerForm.valid).toBeFalsy();
     component.registerForm.controls['confirmPassword'].setValue('1111');
-     // Expect to be truthy since we have assigned confirmPassword the same value as password
+    // Expect to be truthy since we have assigned confirmPassword the same value as password
     expect(component.registerForm.valid).toBeTruthy();
   });
 

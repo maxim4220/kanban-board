@@ -8,6 +8,7 @@ import swal from 'sweetalert2';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
+
 export class SummaryComponent implements OnInit {
   usersArray = [];
   currentUser;
@@ -51,7 +52,6 @@ export class SummaryComponent implements OnInit {
     });
 
   }
-
 
   selectColor() {
     (async () => {
@@ -98,12 +98,11 @@ export class SummaryComponent implements OnInit {
     })();
   }
 
-
   addComment() {
     (async () => {
       const {value: text} = await swal.fire({
         input: 'textarea',
-        inputPlaceholder: 'Type your commnent here...',
+        inputPlaceholder: 'Type your comment here...',
         inputAttributes: {
           'aria-label': 'Type your comment here'
         },
@@ -111,32 +110,32 @@ export class SummaryComponent implements OnInit {
       });
       if (text) {
         if (this.card.comments) {
-          this.card.comments.push({comment: text, subComments: []} );
+          this.card.comments.push({comment: text, subComments: []});
         } else {
           this.card.comments = [];
-          this.card.comments.push({comment: text, subComments: []} );
+          this.card.comments.push({comment: text, subComments: []});
         }
       }
     })();
   }
 
-  addNestedComment(comment) {  
+  addNestedComment(comment) {
     (async () => {
       const {value: text} = await swal.fire({
         title: 'add Review to comment',
         input: 'textarea',
-        inputPlaceholder: 'Type your review for this commnent here...',
+        inputPlaceholder: 'Type your review for this comment here...',
         inputAttributes: {
           'aria-label': 'Type your comment here'
         },
         showCancelButton: true
       });
       if (text) {
-        if(comment.subComments) {
-          comment.subComments.push({comment: text, subComments: []} );
+        if (comment.subComments) {
+          comment.subComments.push({comment: text, subComments: []});
         } else {
           comment.subComments = [];
-          comment.subComments.push({comment: text, subComments: []} );
+          comment.subComments.push({comment: text, subComments: []});
         }
       }
     })();

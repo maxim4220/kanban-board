@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CommentsComponent } from './comments.component';
+import {CommentsComponent} from './comments.component';
 
 describe('CommentsComponent', () => {
   let component: CommentsComponent;
@@ -8,20 +8,20 @@ describe('CommentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommentsComponent ]
+      declarations: [CommentsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentsComponent);
     component = fixture.componentInstance;
-    // Add test dat to input
-    component.comment = {comment: "2222", subComments: Array(0)};
+    // Add test data to input
+    component.comment = {comment: '2222', subComments: Array(0)};
     fixture.detectChanges();
   });
 
-  it('should not create component unless data to inpus is provided ', () => {
+  it('should  create component when data to inpus is provided ', () => {
     expect(component).toBeTruthy();
   });
 });

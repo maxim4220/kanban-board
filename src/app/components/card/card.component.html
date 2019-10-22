@@ -1,25 +1,29 @@
-<div class="card" [draggable]="'true'" (dragstart)="identifyCardBeingDragged($event)"
-     id="list-{{listIndex}}-card-{{cardIndex}}" attr.listIndex="{{listIndex}}" attr.cardIndex="{{cardIndex}}"
-     (dragover)="allowCardDragToBeDropped($event)">
+<div (dragover)="allowCardDragToBeDropped($event)" (dragstart)="identifyCardBeingDragged($event)" [draggable]="'true'"
+     attr.cardIndex="{{cardIndex}}" attr.listIndex="{{listIndex}}" class="card"
+     id="list-{{listIndex}}-card-{{cardIndex}}">
   <div
     [ngClass]="{'ap-task-blue ': card.color =='blue', 'ap-task-white': card.color =='white', 'ap-task-greenYellow': card.color =='greenYellow', 'ap-task-aqua': card.color =='aqua'}"
     class="card-body">
-    <h1 class="card-title mb-2" [(appContentEdit)]="card.header" [draggable]="'false'"></h1>
-    <p class="text-muted card-subtitle mb-2" [(appContentEdit)]="card.summary" [draggable]="'false'"></p>
-    <p class="text-muted card-subtitle mb-2" [draggable]="'false'">Created By:{{card.createdBy}}</p>
-    <p class="text-muted card-subtitle mb-2" [draggable]="'false'">Assigned To:{{card.assignedTo}}</p>
-    <button class="btn btn-sm btn-primary mr-2 mb-2" (click)="selectColor()">select color</button>
+    <h1 [(appContentEdit)]="card.header" [draggable]="'false'" class="card-title mb-2"></h1>
+    <p [(appContentEdit)]="card.summary" [draggable]="'false'" class="text-muted card-subtitle mb-2"></p>
+    <p [draggable]="'false'" class="text-muted card-subtitle mb-2">Created By:{{card.createdBy}}</p>
+    <p [draggable]="'false'" class="text-muted card-subtitle mb-2">Assigned To:{{card.assignedTo}}</p>
+    <button (click)="selectColor()" class="btn btn-sm btn-primary mr-2 mb-2">select color</button>
     <button (click)="assignTicket()" class="btn btn-sm btn-info mr-2 mb-2">Assign to..</button>
-    <button class="btn btn-sm btn-warning mr-2 mb-2" (click)="addComment()">Add comment</button>
-    <button *ngIf="!card.isCompleted; else completedBlock" (click)="markCompleted()" class="ap-complete btn btn-sm btn-success mb-2" [draggable]="'false'">Mark completed</button>
-    <ng-template #completedBlock> <button class="btn btn-sm btn-info mb-2">Task completed!</button></ng-template>
+    <button (click)="addComment()" class="btn btn-sm btn-warning mr-2 mb-2">Add comment</button>
+    <button (click)="markCompleted()" *ngIf="!card.isCompleted; else completedBlock"
+            [draggable]="'false'" class="ap-complete btn btn-sm btn-success mb-2">Mark completed
+    </button>
+    <ng-template #completedBlock>
+      <button class="btn btn-sm btn-info mb-2">Task completed!</button>
+    </ng-template>
     <ng-container *ngIf="card.comments">
-        Comments:
+      Comments:
     </ng-container>
     <ng-container *ngFor="let comment of card.comments; let i = index">
-      <p (click)="addNestedComment(comment)" class="mb-2 " [draggable]="'false'">{{i+1}}.{{comment.comment}}     
+      <p (click)="addNestedComment(comment)" [draggable]="'false'" class="mb-2 ">{{i + 1}}.{{comment.comment}}
         <span class="badge badge-pill badge-success">add</span></p>
-        <app-comments [comment]="comment"></app-comments>
+      <app-comments [comment]="comment"></app-comments>
     </ng-container>
   </div>
 </div>

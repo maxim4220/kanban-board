@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConfirmPasswordValidator} from './confirm-password.validator';
 import {UserAuthService} from '../../services/user-service.service';
@@ -19,6 +19,11 @@ export class RegisterComponent implements OnInit {
   ) {
   }
 
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.registerForm.controls;
+  }
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -27,11 +32,6 @@ export class RegisterComponent implements OnInit {
     }, {
       validator: ConfirmPasswordValidator.MatchPassword
     });
-  }
-
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.registerForm.controls;
   }
 
   onSubmit() {

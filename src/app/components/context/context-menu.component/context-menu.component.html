@@ -1,16 +1,16 @@
 <div style="position: relative;">
-  <div class="right" (click)="this.show = true" style="line-height: 5px;float: right;cursor: pointer;">
-    <svg width="15" height="5">
-      <circle cx="2" cy="2" r="1.5" fill="grey"></circle>
-      <circle cx="7" cy="2" r="1.5" fill="grey"></circle>
-      <circle cx="12" cy="2" r="1.5" fill="grey"></circle>
+  <div (click)="this.show = true" class="right" style="line-height: 5px;float: right;cursor: pointer;">
+    <svg height="5" width="15">
+      <circle cx="2" cy="2" fill="grey" r="1.5"></circle>
+      <circle cx="7" cy="2" fill="grey" r="1.5"></circle>
+      <circle cx="12" cy="2" fill="grey" r="1.5"></circle>
     </svg>
   </div>
   <div *ngIf="show">
     <div class="dropdown-menu dropdown-menu-sm show"
          style="position: absolute;top: 5px;left: inherit;right: 0;padding: .15rem 0;margin: .125rem 0 0;font-size: 0.8rem;min-width: 5rem;">
 
-      <button style="background:rgb(245, 72, 72)" class="dropdown-item btn btn-danger" (click)="emitCloseEvent()">
+      <button (click)="emitCloseEvent()" class="dropdown-item btn btn-danger" style="background:rgb(245, 72, 72)">
         Delete
       </button>
     </div>

@@ -1,21 +1,23 @@
 <div class="grid-container">
-    <div class="grid-item">
-      <h5>Board settings</h5>
-      <button *ngIf="lists.length > 0" (click)=" removeBoard()" type="button" class="btn btn-danger btn-sm m-2">Clear board</button>
-    </div>
-    <div class="grid-item">
-<div class="container" >
-  <div class="row" style="height:inherit;">
-    <app-list class="mr-2 mt-2" *ngFor="let list of lists;let i = index" [list]="list" [listIndex]="i"
-              (moveCardAcrossList)="moveCardAcrossList($event)"
-              (deleteList)="deleteList($event)"
-              attr.listIndex="{{i}}"
-    ></app-list>
-    <div class="col custom-col m-2 p-2">
-      <h6 class="text-center add-new-list" (click)="addList()">Add new column...</h6>
+  <div class="grid-item">
+    <h5>Board settings</h5>
+    <button (click)=" removeBoard()" *ngIf="lists.length > 0" class="btn btn-danger btn-sm m-2" type="button">Clear
+      board
+    </button>
+  </div>
+  <div class="grid-item">
+    <div class="container">
+      <div class="row" style="height:inherit;">
+        <app-list (deleteList)="deleteList($event)" (moveCardAcrossList)="moveCardAcrossList($event)" *ngFor="let list of lists;let i = index" [listIndex]="i"
+                  [list]="list"
+                  attr.listIndex="{{i}}"
+                  class="mr-2 mt-2"
+        ></app-list>
+        <div class="col custom-col m-2 p-2">
+          <h6 (click)="addList()" class="text-center add-new-list">Add new column...</h6>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-    </div>
 </div>
 

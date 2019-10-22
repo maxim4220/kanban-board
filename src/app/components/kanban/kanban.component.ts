@@ -7,7 +7,6 @@ import {UserAuthService} from '../../services/user-service.service';
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent implements OnInit {
-  boardCreated = false;
   user: any;
 
   constructor(userAuthService: UserAuthService) {
@@ -16,9 +15,4 @@ export class KanbanComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  createBoard() {
-    return this.boardCreated = !this.boardCreated;
-  }
-
 }

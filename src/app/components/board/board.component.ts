@@ -22,7 +22,9 @@ export class BoardComponent implements OnInit {
     // ideally retrieve and initialize from some storage.
     this.board = this.localService.getBoard();
     this.lists = this.board.lists || [];
-    setInterval(() => { this.saveBoard(); }, 3000);
+    setInterval(() => {
+      this.saveBoard();
+    }, 3000);
   }
 
   addList() {

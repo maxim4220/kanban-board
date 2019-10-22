@@ -1,8 +1,8 @@
-import {Component, ElementRef, Input, OnInit, Output, EventEmitter, Inject} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ListInterface} from '../../models/list-model';
 import {Card, CardInterface} from '../../models/card-model';
-import {MovementIntf, Movement} from '../../models/movement';
+import {Movement, MovementIntf} from '../../models/movement';
 import {UserAuthService} from '../../services/user-service.service';
 
 @Component({
@@ -17,9 +17,8 @@ export class ListComponent implements OnInit {
   @Output() moveCardAcrossList: EventEmitter<MovementIntf> = new EventEmitter<MovementIntf>();
   @Output() newCardAdded: EventEmitter<Card> = new EventEmitter<CardInterface>();
   @Output() deleteList: EventEmitter<number> = new EventEmitter<number>();
-
-  private cardCount = 0;
   public isCompleted: boolean;
+  private cardCount = 0;
 
   constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private document: Document, private userAuthService: UserAuthService) {
   }

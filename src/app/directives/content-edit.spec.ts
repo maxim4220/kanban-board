@@ -11,7 +11,9 @@ export class TestContainerComponent {
 }
 
 describe('ContentEditDirective', () => {
-  let container, fixture, result;
+  let container;
+  let fixture;
+  let result;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestContainerComponent, ContentEditDirective]
@@ -28,7 +30,7 @@ describe('ContentEditDirective', () => {
   });
   it('should test host listeners', () => {
     const div = fixture.nativeElement.querySelector('div');
-    // div.dblclick();
+    // div.click();
     // expect(result.class).toEqual("inline-edit")
   });
 });

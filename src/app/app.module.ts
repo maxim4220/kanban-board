@@ -11,9 +11,9 @@ import {ContentEditDirective} from './directives/content-edit.directive';
 import {ContextMenuComponent} from './components/context/context-menu.component/context-menu.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ErrorComponent } from './components/error/error.component';
-import { CommentsComponent } from './components/helpers/comments/comments.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ErrorComponent} from './components/error/error.component';
+import {CommentsComponent} from './components/helpers/comments/comments.component';
 
 @NgModule({
   declarations: [

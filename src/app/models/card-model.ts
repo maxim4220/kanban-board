@@ -7,7 +7,6 @@ export interface CardInterface {
   color: string;
   isCompleted: boolean;
   comments?: any;
-  
 }
 
 export class Card implements CardInterface {
