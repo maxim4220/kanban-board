@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   public isCompleted: boolean;
   private cardCount = 0;
 
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private document: Document, private userAuthService: UserAuthService) {
+  constructor(@Inject(DOCUMENT) private document: Document, private userAuthService: UserAuthService) {
   }
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Card} from '../../models/card-model';
 import {UserAuthService} from '../../services/user-service.service';
 import swal from 'sweetalert2';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-summary',
@@ -53,8 +54,7 @@ export class SummaryComponent implements OnInit {
 
   }
 
-  selectColor() {
-    (async () => {
+  async selectColor() {
       const {value: color} = await swal.fire({
         input: 'select',
         inputOptions: {
@@ -69,12 +69,10 @@ export class SummaryComponent implements OnInit {
       if (color) {
         this.card.color = color;
       }
-    })();
   }
 
-  assignTicket() {
+  async assignTicket() {
     const you = this.currentUser.username + ' ' + '(You)';
-    (async () => {
       const {value: user} = await swal.fire({
         input: 'select',
         inputOptions: {
@@ -95,11 +93,10 @@ export class SummaryComponent implements OnInit {
         }
         return swal.fire('You have assigned this task to: ' + user);
       }
-    })();
+
   }
 
-  addComment() {
-    (async () => {
+  async addComment() {
       const {value: text} = await swal.fire({
         input: 'textarea',
         inputPlaceholder: 'Type your comment here...',
@@ -116,11 +113,9 @@ export class SummaryComponent implements OnInit {
           this.card.comments.push({comment: text, subComments: []});
         }
       }
-    })();
   }
 
-  addNestedComment(comment) {
-    (async () => {
+  async addNestedComment(comment) {
       const {value: text} = await swal.fire({
         title: 'add Review to comment',
         input: 'textarea',
@@ -138,7 +133,6 @@ export class SummaryComponent implements OnInit {
           comment.subComments.push({comment: text, subComments: []});
         }
       }
-    })();
   }
 
 }

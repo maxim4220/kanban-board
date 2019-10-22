@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, HostBinding} from '@angular/core';
 
 @Directive({
   selector: '[appContentEdit]'
@@ -17,6 +17,9 @@ export class ContentEditDirective implements OnInit {
   ngOnInit(): void {
     this.makeContentEditable();
   }
+
+  @HostBinding('attr.id')
+  id = 1;
 
   // if you press enter then move out of editable mode
 

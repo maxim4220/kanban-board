@@ -1,18 +1,21 @@
 <div class="grid-container">
   <div class="grid-item">
     <h5>Board settings</h5>
-    <button (click)=" removeBoard()" *ngIf="lists.length > 0" class="btn btn-danger btn-sm m-2" type="button">Clear
-      board
-    </button>
-    <button (click)="saveBoard()" *ngIf="lists.length > 0" class="btn btn-success btn-sm m-2" type="button">Save changes
+    <ng-container *ngIf="lists.length > 0">
+      <button (click)=" removeBoard()"  class="btn btn-danger btn-sm m-2" type="button">Clear
+        board
       </button>
+      <button (click)="saveBoard()"  class="btn btn-success btn-sm m-2" type="button">Save changes
+        </button>
+
+    </ng-container>
   </div>
   <div class="grid-item">
     <div class="container">
       <div class="row" style="height:inherit;">
         <app-list (deleteList)="deleteList($event)" (moveCardAcrossList)="moveCardAcrossList($event)" *ngFor="let list of lists;let i = index" [listIndex]="i"
                   [list]="list"
-                  attr.listIndex="{{i}}"
+                  [attr.listIndex]="i"
                   class="mr-2 mt-2"
         ></app-list>
         <div class="col custom-col m-2 p-2">
