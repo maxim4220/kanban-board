@@ -1,0 +1,6 @@
+<ul *ngIf="comment.subComments?.length > 0">
+    <li *ngFor="let comment of comment.subComments" >
+           <span (click)="addNestedComment(comment)">{{comment.comment}} <span class="badge badge-pill badge-warning">add</span></span>
+      <app-comments [comment]="comment"> </app-comments>
+    </li>
+  </ul>
