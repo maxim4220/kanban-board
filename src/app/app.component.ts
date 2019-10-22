@@ -25,13 +25,8 @@ export class AppComponent {
     // If there is some data in local storage - skip
     if (userAuthService.getRegisteredUsersFromStorage()) {
     } else {
-      // If there are no users in local storage - add some fake users that will be used later in kanban logic.
+      // If there are no users in local storage - add some fake users.
       this.userAuthService.addFakeUsers(this.fakeUsers);
     }
   }
-
-  logout() {
-    return this.userAuthService.logout();
-  }
-
 }

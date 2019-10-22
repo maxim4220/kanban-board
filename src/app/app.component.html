@@ -2,7 +2,7 @@
 <nav *ngIf="currentUser; else unregisteredBlock" class="navbar navbar-expand navbar-dark bg-dark">
   <div class="navbar-nav ap-container ">
     <a class="nav-item nav-link" routerLink="/kanban-board" title="open kanban board">Kanban board</a>
-    <a (click)="logout()" class="nav-item nav-link" title="Sign Out">Logout</a>
+    <a (click)="userAuthService.logout()" class="nav-item nav-link" title="Sign Out">Logout</a>
   </div>
 </nav>
 <ng-template #unregisteredBlock>
