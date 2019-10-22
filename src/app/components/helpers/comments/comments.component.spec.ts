@@ -16,10 +16,12 @@ describe('CommentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentsComponent);
     component = fixture.componentInstance;
+    // Add test dat to input
+    component.comment = {comment: "2222", subComments: Array(0)};
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should not create component unless data to inpus is provided ', () => {
     expect(component).toBeTruthy();
   });
 });
