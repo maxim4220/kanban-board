@@ -1,0 +1,15 @@
+<div *ngIf="loading else loadedBlock">
+    Loading...
+  </div>
+  <div *ngIf="error">
+    Error :(
+  </div>
+
+  <ng-template #loadedBlock>
+    <div *ngIf="result.data">
+      <div *ngFor="let rate of result.data.rates; let i = index">
+        <p>{{i+1}}. {{rate.currency}}: {{rate.rate}}</p>
+      </div>
+    </div>
+  </ng-template>
+ 
