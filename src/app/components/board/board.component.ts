@@ -22,9 +22,10 @@ export class BoardComponent implements OnInit {
     // ideally retrieve and initialize from some storage.
     this.board = this.localService.getBoard();
     this.lists = this.board.lists || [];
-    setInterval(() => {
-      this.saveBoard();
-    }, 3000);
+    // Or we can create an auto save with setinterval.
+    // setInterval(() => {
+    //   this.saveBoard();
+    // }, 3000);
   }
 
   addList() {
