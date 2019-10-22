@@ -15,9 +15,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorComponent} from './components/error/error.component';
 import {CommentsComponent} from './components/helpers/comments/comments.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ApolloModule, Apollo } from 'apollo-angular';
+import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { GraphQlComponent } from './components/graph-ql/graph-ql.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     LoginComponent,
     RegisterComponent,
     ErrorComponent,
-    CommentsComponent
+    CommentsComponent,
+    GraphQlComponent
   ],
   imports: [
     BrowserModule,
@@ -40,16 +43,28 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     FormsModule,
     HttpClientModule,
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    GraphQLModule
   ],
-  providers: [],
+  providers: [{
+    provide: APOLLO_OPTIONS,
+    useFactory: (httpLink: HttpLink) => {
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql"
+        })
+      }
+    },
+    deps: [HttpLink]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
-    apollo.create({
-      link: httpLink.create({uri: '[URL]'}),
-      cache: new InMemoryCache()
-    });
+    // apollo.create({
+    //   link: httpLink.create({uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql"}),
+    //   cache: new InMemoryCache()
+    // });
   }
 }
