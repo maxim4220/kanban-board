@@ -1,0 +1,9 @@
+
+{
+  "/api": {
+    "target": "https://github.com/artsy/metaphysics",
+    "pathRewrite": {"^/api" : ""},
+    "secure": false,
+    "changeOrigin": true
+  }
+}

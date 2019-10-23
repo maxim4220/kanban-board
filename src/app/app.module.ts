@@ -14,12 +14,18 @@ import {RegisterComponent} from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ErrorComponent} from './components/error/error.component';
 import {CommentsComponent} from './components/helpers/comments/comments.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApolloModule, Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { GraphQlComponent } from './components/graph-ql/graph-ql.component';
 import { GraphQLModule } from './graphql.module';
+import { ArtistsComponent } from './components/artists/artists.component';
+
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TokenInterceptor } from './ interceptor/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +40,8 @@ import { GraphQLModule } from './graphql.module';
     RegisterComponent,
     ErrorComponent,
     CommentsComponent,
-    GraphQlComponent
+    GraphQlComponent,
+    ArtistsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,25 +53,36 @@ import { GraphQLModule } from './graphql.module';
     HttpLinkModule,
     GraphQLModule
   ],
-  providers: [{
+  providers: [
+    //{provide: BrowserXhr, useClass:CustExtBrowserXhr},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {
+    
     provide: APOLLO_OPTIONS,
     useFactory: (httpLink: HttpLink) => {
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
-          uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql"
+         // uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql" // Works!
+        uri: 'https://github.com/artsy/metaphysics'
+       //  uri: 'https://fakerql.com/graphql'
+       // uri: 'https://api.yelp.com/v3/graphql --data'
+       // uri: 'https://www.graphqlbin.com/v2/6RQ6TM'
+     //  uri: 'http://graphql.nodaljs.com/graph'
         })
       }
     },
     deps: [HttpLink]
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
   }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
-    // apollo.create({
-    //   link: httpLink.create({uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql"}),
-    //   cache: new InMemoryCache()
-    // });
+  
   }
 }

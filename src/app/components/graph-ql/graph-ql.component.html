@@ -6,9 +6,9 @@
   </div>
 
   <ng-template #loadedBlock>
-    <div *ngIf="result.data">
+    <div id="ap-currency-table" class="mt-2" *ngIf="result.data">
       <div *ngFor="let rate of result.data.rates; let i = index">
-        <p>{{i+1}}. {{rate.currency}}: {{rate.rate}}</p>
+        <p (click)="mutate(rate)">{{i+1}}. {{rate.currency}}: {{rate.rate}}</p>
       </div>
     </div>
   </ng-template>
