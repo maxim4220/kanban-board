@@ -17,7 +17,8 @@ const CREATE_LINK_MUTATION = gql`
     }
   }
 `;
-
+// https://app.pipefy.com/pipes/1093139#
+// https://app.pipefy.com/graphiql
 @Component({
   selector: 'app-artists',
   templateUrl: './artists.component.html',
