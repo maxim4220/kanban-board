@@ -5,14 +5,18 @@ import { HttpHeaders } from '@angular/common/http';
 import swal from 'sweetalert2';
 
 
-// const addNewCard = gql`
-//   mutation addNewCard {
-//     addNewCard($input: any!) {
-
-//     }
-//   }
-// `;
-
+const CREATE_LINK_MUTATION = gql`
+  mutation updateCard($input: UpdateCardInput!,  ) {
+    updateCard(input: $input,) {
+      clientMutationId
+      id
+      assignee_ids
+      due_date
+      label_ids
+      title
+    }
+  }
+`;
 
 @Component({
   selector: 'app-artists',
@@ -32,19 +36,11 @@ export class ArtistsComponent implements OnInit {
     this.loadKanbanData();
   }
 
-  // public addNewCard() {
-  //     this.apollo.mutate({
-  //       mutation: addNewCard
-  //     }).subscribe(({ data }) => {
-  //       console.log('got data', data);
-  //     },(error) => {
-  //       console.log('there was an error sending the query', error);
-  //     });
-  // }
+
 
   public editCard(card) {
     console.log('card', card);
-    this.addNewCardTitle();
+    this.addNewCardTitle(card);
 
   }
 
@@ -82,7 +78,7 @@ organizations {
       });
   }
 
-  private async addNewCardTitle() {
+  private async addNewCardTitle(card) {
     const { value: cardTitle } = await swal.fire({
       title: 'Enter new card title',
       input: 'text',
@@ -90,9 +86,16 @@ organizations {
     })
     if (cardTitle) {
       this.newCardTitle = cardTitle;
-      swal.fire('New title is: ' + cardTitle)
+      swal.fire('New title is: ' + cardTitle);
+      this.apollo.mutate({
+        mutation: CREATE_LINK_MUTATION,
+        variables: {
+          input: card.id
+        }
+      }).subscribe((response) => {
+        console.log('response', response);
+      });
     }
   }
-
 
 }
