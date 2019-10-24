@@ -12,6 +12,11 @@ import { ArtistsComponent } from './components/artists/artists.component';
 
 export const routes: Routes = [
   {
+    path: '',
+
+    component: ArtistsComponent
+  },
+  {
     path: 'kanban-board',
     canActivate: [AuthGuardService],
     component: KanbanComponent
@@ -36,7 +41,7 @@ export const routes: Routes = [
   },
   {path: 'error/404', component: ErrorComponent},
   // otherwise redirect to kanban board
-  {path: '**', redirectTo: 'kanban-board'}
+  {path: '**', redirectTo: 'artists'}
 ];
 
 @NgModule({

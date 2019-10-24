@@ -1,1 +1,25 @@
-<p>artists works!</p>
+
+<div *ngIf="loading; else loadedBlock">
+Loading...
+</div>
+
+<ng-template #loadedBlock>
+    <div id="ap-country-table" class="mt-2" *ngIf="result?.data">
+      <h1 id="ap-title">Remote Kanban board</h1>
+        <h3>
+            Personal Information:
+        </h3> 
+        Name: {{result.data.me.name}}<br>
+        Email: {{result.data.me.email}}<br>
+        Username: {{result.data.me.username}}
+        <ng-container *ngFor="let org of result.data.organizations; let i = index">
+          <h3>Organization Details:</h3>
+          <p >{{i+1}}. {{org.name}}: {{org.id}}</p>
+        </ng-container>
+        <h3>Card:</h3>
+        <h5 (click)="editCard(result.data.card)"> {{result.data.card.title}}</h5>
+       
+        <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
+      </div>
+</ng-template>
+

@@ -2,74 +2,97 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { HttpHeaders } from '@angular/common/http';
+import swal from 'sweetalert2';
 
-const cors = require('cors')
 
+// const addNewCard = gql`
+//   mutation addNewCard {
+//     addNewCard($input: any!) {
 
-const query = `{
-  products: allProducts(count: 25) {
-    id
-    name
-    price
-  }
+//     }
+//   }
+// `;
 
-  user: User(id: "wk0z1j1tzj7xc0116is3ckdrx") {
-    id
-    firstName
-    lastName
-    email
-    avatar
-  }
-}`;
 
 @Component({
   selector: 'app-artists',
   templateUrl: './artists.component.html',
-  styleUrls: ['./artists.component.scss']
+  styleUrls: ['./artists.component.scss'],
 })
-export class ArtistsComponent implements OnInit {
 
-  constructor(private apollo: Apollo,) { }
+export class ArtistsComponent implements OnInit {
+  public result;
+  public loading = true;
+  public country;
+  private newCardTitle: string;
+
+  constructor(private apollo: Apollo, ) { }
 
   ngOnInit() {
-   
+    this.loadKanbanData();
+  }
+
+  // public addNewCard() {
+  //     this.apollo.mutate({
+  //       mutation: addNewCard
+  //     }).subscribe(({ data }) => {
+  //       console.log('got data', data);
+  //     },(error) => {
+  //       console.log('there was an error sending the query', error);
+  //     });
+  // }
+
+  public editCard(card) {
+    console.log('card', card);
+    this.addNewCardTitle();
+
+  }
+
+
+  private loadKanbanData() {
     this.apollo
-    // Set up queries.
+      // Set up queries.
       .watchQuery({
         query: gql`
-       {
-      
-        
-  me {
-    name
-    email
+{
+  
+  card(id: 43699885) { title id}me {id name email username timeZone preferences { browserNativeNotificationEnabled  displayImprovements  displayOrganizationReportSidebar  displayPipeReportsSidebar suggestedTemplatesClosed
   }
-
-     },
+}
+organizations {
+  id
+  name
+  tables {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+  name
+}
+}
+,
         `,
-        context: {
-          // headers: new HttpHeaders().set("Access-Control-Allow-Headers", "*" ),
-          
-          // headers: new HttpHeaders().set("Access-Control-Allow-Headers", "*"),
-         //Access-Control-Allow-Headers
-         headers: {
-           'x-access-token':'DGJpyEEdM81EtF1y111y',
-           'x-user-id': '5db0599404eb690012649cb7',
-           'Access-Control-Allow-Origin': '*',
-           // Auth token :   DGJpyEEdM81EtF1y111y
-          //'Access-Control-Allow-Headers': '*',
-         // 'Access-Control-Allow-Origin': '*'
-        },
-        
-        }
       })
       .valueChanges.subscribe(result => {
+        this.result = result;
+        this.loading = result.loading;
         console.log('result!!!!', result);
-   
- 
       });
   }
-  
+
+  private async addNewCardTitle() {
+    const { value: cardTitle } = await swal.fire({
+      title: 'Enter new card title',
+      input: 'text',
+      inputPlaceholder: 'Enter new title'
+    })
+    if (cardTitle) {
+      this.newCardTitle = cardTitle;
+      swal.fire('New title is: ' + cardTitle)
+    }
   }
 
 
+}

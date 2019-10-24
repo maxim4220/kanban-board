@@ -57,18 +57,19 @@ import { TokenInterceptor } from './ interceptor/interceptor.service';
     //{provide: BrowserXhr, useClass:CustExtBrowserXhr},
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
-    
     provide: APOLLO_OPTIONS,
     useFactory: (httpLink: HttpLink) => {
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
          // uri: "https://o5x5jzoo7z.sse.codesandbox.io/graphql" // Works!
-        uri: 'https://github.com/artsy/metaphysics'
+      //  uri: 'https://github.com/artsy/metaphysics'
        //  uri: 'https://fakerql.com/graphql'
        // uri: 'https://api.yelp.com/v3/graphql --data'
        // uri: 'https://www.graphqlbin.com/v2/6RQ6TM'
      //  uri: 'http://graphql.nodaljs.com/graph'
+    //  uri: 'https://api.graphql.jobs/'
+       uri: 'https://api.pipefy.com/graphql'
         })
       }
     },
