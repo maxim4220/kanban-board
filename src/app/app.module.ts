@@ -20,7 +20,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { GraphQlComponent } from './components/graph-ql/graph-ql.component';
 import { GraphQLModule } from './graphql.module';
-import { ArtistsComponent } from './components/artists/artists.component';
+import { DynamicBoardComponent } from './components/dynamic-board/dynamic-board.component';
 
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -41,7 +41,7 @@ import { TokenInterceptor } from './ interceptor/interceptor.service';
     ErrorComponent,
     CommentsComponent,
     GraphQlComponent,
-    ArtistsComponent
+    DynamicBoardComponent
   ],
   imports: [
     BrowserModule,

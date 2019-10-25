@@ -7,13 +7,13 @@ import {AuthGuardService} from './guards/auth-guard.service';
 import {ErrorComponent} from './components/error/error.component';
 import {SingUpGuardService} from './guards/sing-up-guard.service';
 import { GraphQlComponent } from './components/graph-ql/graph-ql.component';
-import { ArtistsComponent } from './components/artists/artists.component';
+import { DynamicBoardComponent } from './components/dynamic-board/dynamic-board.component';
 
 
 export const routes: Routes = [
   {
     path: 'dynamic-kanban-board',
-    component: ArtistsComponent
+    component: DynamicBoardComponent
   },
   {
     path: 'kanban-board',
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'artists',
-    component: ArtistsComponent
+    component: DynamicBoardComponent
   },
   {path: 'error/404', component: ErrorComponent},
   // otherwise redirect to dynamic kanban board
