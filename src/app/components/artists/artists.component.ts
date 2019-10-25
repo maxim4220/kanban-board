@@ -169,11 +169,9 @@ export class ArtistsComponent implements OnInit {
 
   private loadKanbanData() {
     this.apollo
-    // Set up queries.
       .watchQuery({
         query: gql`
 {
-  
   card(id: 43699885) { title id}me {
     id 
     name
@@ -200,14 +198,12 @@ organizations {
   }
   name
 }
-
   allCards(first:10, pipeId:1093139, last: 10) {
    pageInfo {
      endCursor
      startCursor
    }
     edges {
-      
       node {
         id
         title
@@ -237,7 +233,6 @@ organizations {
     }
   }
 }
-
 ,
         `,
       })
@@ -248,12 +243,11 @@ organizations {
   }
 
   // temporary method to reload the component and fetch refreshed data after an update.
-
   // Do do: replace this method with new logic after cards have been changed.
   private reloadComponent() {
     setTimeout(() => {
       location.reload();
     }, 1000);
-
   }
+
 }
