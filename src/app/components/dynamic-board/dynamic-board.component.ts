@@ -32,7 +32,12 @@ const EDIT_CARD = gql`
 mutation updateCard($input: UpdateCardInput!) {
   updateCard(input: $input) {
 card {
+  labels {
+      color
+    }
   id
+  title
+  due_date
 }
 clientMutationId
   }
@@ -124,7 +129,7 @@ export class DynamicBoardComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         }).then(_ => {
-          return this.result.data.allCards.edges.splice(this.result.data.allCards.edges.findIndex(item => item.id == card_id), 1)
+          return this.result.data.allCards.edges.splice(this.result.data.allCards.edges.findIndex(item => item.id == card_id), 1);
         });
       } else {
         return this.errorMsg();
@@ -168,7 +173,12 @@ export class DynamicBoardComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          return this.reloadComponent();
+          this.result.data.allCards.edges.some(element => {
+            if(element.node.id == response.data.updateCard.card.id) {
+              const node = Object.assign({ node: response.data.updateCard.card });
+              return element = node;
+            }
+          });
         } else {
           return this.errorMsg();
         }
@@ -245,14 +255,6 @@ organizations {
         this.result = result;
         this.loading = result.loading;
       });
-  }
-
-  // temporary method to reload the component and fetch refreshed data after an update.
-  // Do do: replace this method with new logic after cards have been changed.
-  private reloadComponent() {
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
   }
 
   private errorMsg() {
