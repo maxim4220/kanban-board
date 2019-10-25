@@ -21,8 +21,6 @@ Loading...
       
           <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
       </div>
-
-
       <div class="grid-item ap-board" >
         <ng-container *ngFor="let card of result.data.allCards.edges">
 
@@ -38,8 +36,6 @@ Loading...
                 <button (click)="deleteCard(card.node.id)" type="button" class="btn btn-danger">Delete</button>
                
               </div> 
-          <!-- <button class="btn btn-danger btn-sm">Delete</button>
-          <button class="btn btn-info btn-sm">Edit</button> -->
           </div>
         </ng-container>
       </div>

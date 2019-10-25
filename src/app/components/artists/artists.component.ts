@@ -141,7 +141,6 @@ organizations {
       .valueChanges.subscribe(result => {
         this.result = result;
         this.loading = result.loading;
-        console.log('result!!!!', result);
       });
   }
 
@@ -223,7 +222,6 @@ organizations {
 
 
   public async editCard(card_id){
-    console.log(card_id);
     const { value: formValues } = await swal.fire({
       title: 'Add new card!',
       html:
@@ -258,9 +256,7 @@ organizations {
           showConfirmButton: false,
           timer: 1500
         })
-        .then( _ => {
-          return this.reloadComponent();
-         })
+    return this.reloadComponent();
       });
     }
   }
@@ -268,10 +264,9 @@ organizations {
   // temporary method to reload the component and fetch refreshed data after an update.
   // Do do: replace this method with new logic after cards have been changed.
   private reloadComponent() {
-    this.router.navigate(['/']);
-  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-  //     this.router.navigate(['/']);
-  // });
+    setTimeout(()=>{    
+      location.reload()
+ }, 1000);
+    
   }
-
 }
