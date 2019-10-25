@@ -27,9 +27,29 @@
   flex-direction: column;
   height: 40vh;
   display: flex;
+  opacity: 0.9;
+  min-width: 130px;
 }
 
-.btn-group-vertical {
+.ap-modify-card {
   justify-content: flex-end;
   display: flex;
 }
+
+.ap-card:hover {
+  transform: scale(1.1);
+  z-index: 1000;
+  opacity: 1;
+}
+
+.ap-due-date {
+  justify-content: center;
+  display: flex;
+}
+
+@media (max-width: 1000px) {
+  .ap-card {
+    min-width: 100px;
+  }
+}
+

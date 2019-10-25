@@ -17,28 +17,31 @@
         <h3>Organization Details:</h3>
         <p>{{i + 1}}. {{org.name}}: {{org.id}}</p>
       </ng-container>
+      <div class="btn-group-vertical mt-2">
+        <a class="btn btn-primary" href="https://app.pipefy.com/pipes/1093139#cards/" target="_blank">View origin
+          board</a>
+        <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
 
-      <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
+      </div>
     </div>
     <div class="grid-item ap-board">
       <ng-container *ngFor="let card of result.data.allCards.edges">
-
-        <div class="ap-card m-1 ">
-          <h5 class="p-1">{{card.node.title}}</h5> <br>
-          <p *ngIf="card.node.due_date; else dateNotSetBlock">
-            <span class="badge badge-warning">{{card.node.due_date | date: 'short'}}</span>
-          </p>
-          <ng-template #dateNotSetBlock><span class="badge badge-warning">No due date</span></ng-template>
-
-          <div class="btn-group-vertical">
+        <div class="ap-card m-2 ">
+          <h5 class="p-1">{{card.node.title}}</h5>
+          <div class="ap-due-date">
+            <span *ngIf="card.node.due_date; else dateNotSetBlock"
+                  class="badge badge-warning">{{card.node.due_date | date: 'short'}}</span>
+          </div>
+          <ng-template #dateNotSetBlock><span class="badge badge-info">No due date</span></ng-template>
+          <div class="btn-group-vertical ap-modify-card">
+            <a class="btn btn-info" href="https://app.pipefy.com/pipes/1093139#cards/{{card.node.id}}" target="_blank"
+               type="button">View origin</a>
             <button (click)="editCard(card.node.id)" class="btn btn-primary" type="button">Edit</button>
             <button (click)="deleteCard(card.node.id)" class="btn btn-danger" type="button">Delete</button>
-
           </div>
         </div>
       </ng-container>
     </div>
-
   </div>
 </ng-template>
 

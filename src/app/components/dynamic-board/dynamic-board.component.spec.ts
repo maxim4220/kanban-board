@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ArtistsComponent} from './artists.component';
+import {DynamicBoardComponent} from './dynamic-board.component';
 
 describe('ArtistsComponent', () => {
-  let component: ArtistsComponent;
-  let fixture: ComponentFixture<ArtistsComponent>;
+  let component: DynamicBoardComponent;
+  let fixture: ComponentFixture<DynamicBoardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ArtistsComponent]
+      declarations: [DynamicBoardComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArtistsComponent);
+    fixture = TestBed.createComponent(DynamicBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

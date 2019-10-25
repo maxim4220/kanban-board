@@ -37,12 +37,12 @@ clientMutationId
 // https://app.pipefy.com/graphiql
 // https://api-docs.pipefy.com/reference/mutations/createCard/
 @Component({
-  selector: 'app-artists',
-  templateUrl: './artists.component.html',
-  styleUrls: ['./artists.component.scss'],
+  selector: 'app-dynamic-kanban-board',
+  templateUrl: './dynamic-board.component.html',
+  styleUrls: ['./dynamic-board.component.scss'],
 })
 
-export class ArtistsComponent implements OnInit {
+export class DynamicBoardComponent implements OnInit {
   public result;
   public loading = true;
 
@@ -82,14 +82,16 @@ export class ArtistsComponent implements OnInit {
           }
         }
       }).subscribe((response) => {
-        swal.fire({
-          position: 'center',
-          type: 'success',
-          title: 'Your have Added the card',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        return this.reloadComponent();
+        if (response) {
+          swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Your have Added the card',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return this.reloadComponent();
+        }
       });
     }
   }
@@ -129,7 +131,7 @@ export class ArtistsComponent implements OnInit {
 
   public async editCard(card_id) {
     const {value: formValues} = await swal.fire({
-      title: 'Add new card!',
+      title: 'Edit existing card!',
       html:
         '<input placeholder="Change current card title" id="swal-input-title" class="swal2-input">' +
         '<input placeholder="Change current card description" id="swal-input-description" class="swal2-input">' +
@@ -155,14 +157,16 @@ export class ArtistsComponent implements OnInit {
           }
         }
       }).subscribe((response) => {
-        swal.fire({
-          position: 'center',
-          type: 'success',
-          title: 'Your have changed the card',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        return this.reloadComponent();
+        if (response) {
+          swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Your have changed the card',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return this.reloadComponent();
+        }
       });
     }
   }
