@@ -29,10 +29,10 @@ mutation createCard($input: CreateCardInput!) {
 clientMutationId
   }
 }
-
 `;
 // https://app.pipefy.com/pipes/1093139#
 // https://app.pipefy.com/graphiql
+// https://api-docs.pipefy.com/reference/mutations/createCard/
 @Component({
   selector: 'app-artists',
   templateUrl: './artists.component.html',
@@ -82,7 +82,42 @@ organizations {
   }
   name
 }
+
+  allCards(first:10, pipeId:1093139, last: 10) {
+   pageInfo {
+     endCursor
+     startCursor
+   }
+    edges {
+      
+      node {
+        title
+        expiration {
+          expiredAt
+          shouldExpireAt
+        }
+        createdBy {
+          id
+        }
+        id
+       age
+        comments {
+          id
+        }
+      }
+    }
+  }
+  pipe(id:1093139) {
+    users {
+      id
+    }
+    cards_count
+    title_field {
+      id
+    }
+  }
 }
+
 ,
         `,
       })
@@ -113,57 +148,44 @@ organizations {
     }
   }
 
-  // ADD NEW CARD!
+  // ADD NEW CARD!. Works.
   async addNewCard() {
     const { value: formValues } = await swal.fire({
       title: 'Add new card!',
       html:
         '<input placeholder="Enter card title" id="swal-input-title" class="swal2-input">' +
-        '<input placeholder="Enter card description" id="swal-input-description" class="swal2-input">'+
-        '<input type="date" placeholder="Choose a due date" id="swal-input-date" class="swal2-input">' ,
+        '<input placeholder="Enter card description" id="swal-input-description" class="swal2-input">' +
+        '<input type="date" placeholder="Choose a due date" id="swal-input-date" class="swal2-input">',
       focusConfirm: false,
       preConfirm: () => {
         return [
-           document.getElementById('swal-input-title')['value'],
-           document.getElementById('swal-input-description')['value'] ,
-           document.getElementById('swal-input-date')['value']
+          document.getElementById('swal-input-title')['value'],
+          document.getElementById('swal-input-description')['value'],
+          document.getElementById('swal-input-date')['value']
         ]
       }
     })
     if (formValues) {
       console.log('values', formValues);
-    //  let a = formValues[2].toISOString();
-    let a = new Date(formValues[2]).toISOString();
+      //  let a = formValues[2].toISOString();
+      let a = new Date(formValues[2]).toISOString();
       console.log('a', a);
-      
+
       swal.fire(JSON.stringify(formValues));
-    this.apollo.mutate({
-      mutation: CREATE_CARD,
-      variables: {
-        input: {
-          clientMutationId: "909778",
-          pipe_id: 1093139,
-          title: formValues[0],
-          due_date: new Date(formValues[2]).toISOString()
+      this.apollo.mutate({
+        mutation: CREATE_CARD,
+        variables: {
+          input: {
+            clientMutationId: "909778",
+            pipe_id: 1093139,
+            title: formValues[0],
+            due_date: new Date(formValues[2]).toISOString()
+          }
         }
-       //pipe_id: '1093139'
-      }
-    }).subscribe((response) => {
-      console.log('response add new card', response);
-    });
+      }).subscribe((response) => {
+        console.log('response add new card', response);
+      });
     }
-
-    
-
-    // this.apollo.mutate({
-    //   mutation: CREATE_CARD,
-    //   variables: {
-    //    // input: 'Some test text'
-    //    pipe_id: '1093139'
-    //   }
-    // }).subscribe((response) => {
-    //   console.log('response add new card', response);
-    // });
   }
 
 }
