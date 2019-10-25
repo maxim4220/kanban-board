@@ -7,7 +7,12 @@ const CREATE_CARD = gql`
 mutation createCard($input: CreateCardInput!) {
     createCard(input: $input) {
   card {
+    labels {
+      color
+    }
    id
+   title
+   due_date
  }
 clientMutationId
   }
@@ -45,6 +50,8 @@ clientMutationId
 export class DynamicBoardComponent implements OnInit {
   public result;
   public loading = true;
+  private cardPriorities = ['black', 'rgb(137, 63, 227)', ]
+   
 
   constructor(private apollo: Apollo) {
   }
@@ -71,7 +78,7 @@ export class DynamicBoardComponent implements OnInit {
       }
     });
     if (formValues) {
-      this.apollo.mutate({
+      this.apollo.mutate<any>({
         mutation: CREATE_CARD,
         variables: {
           input: {
@@ -90,7 +97,10 @@ export class DynamicBoardComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          return this.reloadComponent();
+          const node = Object.assign({node: response.data.createCard.card })
+          this.result.data.allCards.edges.push(node);
+        } else {
+          return this.errorMsg();
         }
       });
     }
@@ -113,18 +123,11 @@ export class DynamicBoardComponent implements OnInit {
           title: 'Your have deleted the card!',
           showConfirmButton: false,
           timer: 1500
-        })
-          .then(_ => {
+        }).then(_ => {
             return this.reloadComponent();
           });
       } else {
-        return swal.fire({
-          position: 'center',
-          type: 'error',
-          title: 'Error has occured',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        return this.errorMsg();
       }
     });
   }
@@ -166,6 +169,8 @@ export class DynamicBoardComponent implements OnInit {
             timer: 1500
           });
           return this.reloadComponent();
+        } else {
+          return this.errorMsg();
         }
       });
     }
@@ -173,7 +178,7 @@ export class DynamicBoardComponent implements OnInit {
 
   private loadKanbanData() {
     this.apollo
-      .watchQuery({
+      .watchQuery<any>({
         query: gql`
 {
   card(id: 43699885) { title id}me {
@@ -182,13 +187,6 @@ export class DynamicBoardComponent implements OnInit {
      email 
      username 
      timeZone 
-     preferences {
-        browserNativeNotificationEnabled 
-         displayImprovements 
-          displayOrganizationReportSidebar 
-           displayPipeReportsSidebar
-            suggestedTemplatesClosed
-  }
 }
 organizations {
   id
@@ -209,6 +207,9 @@ organizations {
    }
     edges {
       node {
+        labels{
+          color
+        }
         id
         title
         due_date
@@ -252,6 +253,16 @@ organizations {
     setTimeout(() => {
       location.reload();
     }, 1000);
+  }
+
+  private errorMsg() {
+    return swal.fire({
+      position: 'center',
+      type: 'error',
+      title: 'Error has occured',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 
 }
