@@ -26,7 +26,7 @@
     </div>
     <div class="grid-item ap-board">
       <ng-container *ngFor="let card of result.data.allCards.edges">
-        <div class="ap-card m-2 ">
+        <div [ngStyle]="{'border-top': card.node.labels && card.node.labels[0]?.color ? 'solid 5px '+card.node.labels[0].color : 'solid 3px ' + 'white'}" class="ap-card m-2 ">
           <h5 class="p-1">{{card.node.title}}</h5>
           <div class="ap-due-date">
             <span *ngIf="card.node.due_date; else dateNotSetBlock"
