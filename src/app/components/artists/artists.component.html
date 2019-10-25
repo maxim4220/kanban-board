@@ -4,23 +4,42 @@ Loading...
 </div>
 
 <ng-template #loadedBlock>
-    <div id="ap-country-table" class="mt-2" *ngIf="result?.data">
-      <h1 id="ap-title">Remote Kanban board</h1>
-        <h3>
-            Personal Information:
-        </h3> 
-        Name: {{result.data.me.name}}<br>
-        Email: {{result.data.me.email}}<br>
-        Username: {{result.data.me.username}} <br>
-        ID: {{re}}
-        <ng-container *ngFor="let org of result.data.organizations; let i = index">
-          <h3>Organization Details:</h3>
-          <p >{{i+1}}. {{org.name}}: {{org.id}}</p>
+    <h1 id="ap-title">Remote Kanban board</h1>
+    <div  class="grid-container mt-2" *ngIf="result?.data">
+      <div class="grid-item">
+          <h3>
+              Personal Information:
+          </h3> 
+          Name: {{result.data.me.name}} <br>
+          Email: {{result.data.me.email}} <br>
+          Username: {{result.data.me.username}}  <br>
+          ID: {{result.data.me.id}}
+          <ng-container *ngFor="let org of result.data.organizations; let i = index">
+            <h3>Organization Details:</h3>
+            <p >{{i+1}}. {{org.name}}: {{org.id}}</p>
+          </ng-container>
+      
+          <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
+      </div>
+
+
+      <div class="grid-item ap-board" >
+        <ng-container *ngFor="let card of result.data.allCards.edges">
+
+          <div class="ap-card m-1 ">
+            <h5 class="p-1">{{card.node.title}}</h5> <br>
+           
+            <div class="btn-group-vertical">
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+               
+              </div> 
+          <!-- <button class="btn btn-danger btn-sm">Delete</button>
+          <button class="btn btn-info btn-sm">Edit</button> -->
+          </div>
         </ng-container>
-        <h3>Card:</h3>
-        <h5 (click)="editCard(result.data.card)"> {{result.data.card.title}}</h5>
-       
-        <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
+      </div>
+
       </div>
 </ng-template>
 

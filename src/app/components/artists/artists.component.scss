@@ -1,8 +1,38 @@
-// #ap-country-table {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr;
-// }
+
 
 #ap-title {
     text-align: center;
 }
+
+#ap-board-table  {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". .";
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". .";
+  }
+  
+  .ap-board {
+      display:flex;
+  }
+
+  .ap-card {
+    // background-color: #d5f5ff;
+    // border: 2px solid blue
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+    justify-content: space-between;
+    flex-direction: column;
+    height: 50vh;
+    display: flex;
+  }
+
+  .btn-group-vertical {
+    justify-content: flex-end;
+    display: flex;
+  }
