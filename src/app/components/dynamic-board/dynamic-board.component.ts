@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Apollo} from 'apollo-angular';
+import { Component, OnInit } from '@angular/core';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import swal from 'sweetalert2';
 
@@ -50,8 +50,8 @@ clientMutationId
 export class DynamicBoardComponent implements OnInit {
   public result;
   public loading = true;
-  private cardPriorities = ['black', 'rgb(137, 63, 227)', ]
-   
+  private cardPriorities = ['black', 'rgb(137, 63, 227)',]
+
 
   constructor(private apollo: Apollo) {
   }
@@ -62,7 +62,7 @@ export class DynamicBoardComponent implements OnInit {
 
   // ADD NEW CARD!. Works.
   async addNewCard() {
-    const {value: formValues} = await swal.fire({
+    const { value: formValues } = await swal.fire({
       title: 'Add new card!',
       html:
         '<input placeholder="Enter card title" id="swal-input-title" class="swal2-input">' +
@@ -97,7 +97,7 @@ export class DynamicBoardComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          const node = Object.assign({node: response.data.createCard.card })
+          const node = Object.assign({ node: response.data.createCard.card })
           this.result.data.allCards.edges.push(node);
         } else {
           return this.errorMsg();
@@ -107,7 +107,7 @@ export class DynamicBoardComponent implements OnInit {
   }
 
   deleteCard(card_id) {
-    this.apollo.mutate({
+    this.apollo.mutate<any>({
       mutation: DELETE_CARD,
       variables: {
         input: {
@@ -116,7 +116,7 @@ export class DynamicBoardComponent implements OnInit {
         }
       }
     }).subscribe((response) => {
-      if (response.data['deleteCard'].success) {
+      if (response.data.deleteCard.success) {
         swal.fire({
           position: 'center',
           type: 'success',
@@ -124,8 +124,8 @@ export class DynamicBoardComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         }).then(_ => {
-            return this.reloadComponent();
-          });
+          return this.result.data.allCards.edges.splice(this.result.data.allCards.edges.findIndex(item => item.id == card_id), 1)
+        });
       } else {
         return this.errorMsg();
       }
@@ -133,7 +133,7 @@ export class DynamicBoardComponent implements OnInit {
   }
 
   public async editCard(card_id) {
-    const {value: formValues} = await swal.fire({
+    const { value: formValues } = await swal.fire({
       title: 'Edit existing card!',
       html:
         '<input placeholder="Change current card title" id="swal-input-title" class="swal2-input">' +
@@ -149,7 +149,7 @@ export class DynamicBoardComponent implements OnInit {
       }
     });
     if (formValues) {
-      this.apollo.mutate({
+      this.apollo.mutate<any>({
         mutation: EDIT_CARD,
         variables: {
           input: {
@@ -242,9 +242,9 @@ organizations {
         `,
       })
       .valueChanges.subscribe(result => {
-      this.result = result;
-      this.loading = result.loading;
-    });
+        this.result = result;
+        this.loading = result.loading;
+      });
   }
 
   // temporary method to reload the component and fetch refreshed data after an update.
