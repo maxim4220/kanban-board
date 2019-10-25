@@ -11,7 +11,8 @@ Loading...
         </h3> 
         Name: {{result.data.me.name}}<br>
         Email: {{result.data.me.email}}<br>
-        Username: {{result.data.me.username}}
+        Username: {{result.data.me.username}} <br>
+        ID: {{re}}
         <ng-container *ngFor="let org of result.data.organizations; let i = index">
           <h3>Organization Details:</h3>
           <p >{{i+1}}. {{org.name}}: {{org.id}}</p>

@@ -8,14 +8,28 @@ import swal from 'sweetalert2';
 const CREATE_LINK_MUTATION = gql`
   mutation updateCard($input: UpdateCardInput!,  ) {
     updateCard(input: $input,) {
-      clientMutationId
-      id
-      assignee_ids
-      due_date
-      label_ids
-      title
+      pipe_id
     }
   }
+`;
+//createCard
+const CREATE_CARD = gql`
+# mutation createCard($input: CreateCardInput!  ) {
+#   createCard(input: $input) {
+#     card
+#     clientMutationId
+#   }
+# }
+mutation createCard($input: CreateCardInput!) {
+  # createCard(input: {clientMutationId: "909778", pipe_id: 1093139, title:"Newly created TICKET!!!!" }) {
+    createCard(input: $input) {
+  card {
+   id
+ }
+clientMutationId
+  }
+}
+
 `;
 // https://app.pipefy.com/pipes/1093139#
 // https://app.pipefy.com/graphiql
@@ -97,6 +111,59 @@ organizations {
         console.log('response', response);
       });
     }
+  }
+
+  // ADD NEW CARD!
+  async addNewCard() {
+    const { value: formValues } = await swal.fire({
+      title: 'Add new card!',
+      html:
+        '<input placeholder="Enter card title" id="swal-input-title" class="swal2-input">' +
+        '<input placeholder="Enter card description" id="swal-input-description" class="swal2-input">'+
+        '<input type="date" placeholder="Choose a due date" id="swal-input-date" class="swal2-input">' ,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+           document.getElementById('swal-input-title')['value'],
+           document.getElementById('swal-input-description')['value'] ,
+           document.getElementById('swal-input-date')['value']
+        ]
+      }
+    })
+    if (formValues) {
+      console.log('values', formValues);
+    //  let a = formValues[2].toISOString();
+    let a = new Date(formValues[2]).toISOString();
+      console.log('a', a);
+      
+      swal.fire(JSON.stringify(formValues));
+    this.apollo.mutate({
+      mutation: CREATE_CARD,
+      variables: {
+        input: {
+          clientMutationId: "909778",
+          pipe_id: 1093139,
+          title: formValues[0],
+          due_date: new Date(formValues[2]).toISOString()
+        }
+       //pipe_id: '1093139'
+      }
+    }).subscribe((response) => {
+      console.log('response add new card', response);
+    });
+    }
+
+    
+
+    // this.apollo.mutate({
+    //   mutation: CREATE_CARD,
+    //   variables: {
+    //    // input: 'Some test text'
+    //    pipe_id: '1093139'
+    //   }
+    // }).subscribe((response) => {
+    //   console.log('response add new card', response);
+    // });
   }
 
 }
