@@ -12,8 +12,7 @@ import { ArtistsComponent } from './components/artists/artists.component';
 
 export const routes: Routes = [
   {
-    path: '',
-
+    path: 'dynamic-kanban-board',
     component: ArtistsComponent
   },
   {
@@ -40,8 +39,8 @@ export const routes: Routes = [
     component: ArtistsComponent
   },
   {path: 'error/404', component: ErrorComponent},
-  // otherwise redirect to kanban board
-  {path: '**', redirectTo: 'artists'}
+  // otherwise redirect to dynamic kanban board
+  {path: '**', redirectTo: 'dynamic-kanban-board'}
 ];
 
 @NgModule({
