@@ -1,45 +1,44 @@
-
 <div *ngIf="loading; else loadedBlock">
-Loading...
+  Loading...
 </div>
 
 <ng-template #loadedBlock>
-    <h1 id="ap-title">Remote Kanban board</h1>
-    <div  class="grid-container mt-2" *ngIf="result?.data">
-      <div class="grid-item">
-          <h3>
-              Personal Information:
-          </h3> 
-          Name: {{result.data.me.name}} <br>
-          Email: {{result.data.me.email}} <br>
-          Username: {{result.data.me.username}}  <br>
-          ID: {{result.data.me.id}}
-          <ng-container *ngFor="let org of result.data.organizations; let i = index">
-            <h3>Organization Details:</h3>
-            <p >{{i+1}}. {{org.name}}: {{org.id}}</p>
-          </ng-container>
-      
-          <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
-      </div>
-      <div class="grid-item ap-board" >
-        <ng-container *ngFor="let card of result.data.allCards.edges">
+  <h1 id="ap-title">Remote Kanban board</h1>
+  <div *ngIf="result?.data" class="grid-container mt-2">
+    <div class="grid-item">
+      <h3>
+        Personal Information:
+      </h3>
+      Name: {{result.data.me.name}} <br>
+      Email: {{result.data.me.email}} <br>
+      Username: {{result.data.me.username}}  <br>
+      ID: {{result.data.me.id}}
+      <ng-container *ngFor="let org of result.data.organizations; let i = index">
+        <h3>Organization Details:</h3>
+        <p>{{i + 1}}. {{org.name}}: {{org.id}}</p>
+      </ng-container>
 
-          <div class="ap-card m-1 ">
-            <h5 class="p-1">{{card.node.title}}</h5> <br>
-            <p *ngIf="card.node.due_date; else dateNotSetBlock"> 
-                <span class="badge badge-warning">{{card.node.due_date | date: 'short'}}</span>
-               </p>
-            <ng-template #dateNotSetBlock><span class="badge badge-warning">No due date</span> </ng-template>
-           
-            <div class="btn-group-vertical">
-                <button (click)="editCard(card.node.id)" type="button" class="btn btn-primary">Edit</button>
-                <button (click)="deleteCard(card.node.id)" type="button" class="btn btn-danger">Delete</button>
-               
-              </div> 
+      <button (click)="addNewCard()" class="btn btn-success"> Add new card</button>
+    </div>
+    <div class="grid-item ap-board">
+      <ng-container *ngFor="let card of result.data.allCards.edges">
+
+        <div class="ap-card m-1 ">
+          <h5 class="p-1">{{card.node.title}}</h5> <br>
+          <p *ngIf="card.node.due_date; else dateNotSetBlock">
+            <span class="badge badge-warning">{{card.node.due_date | date: 'short'}}</span>
+          </p>
+          <ng-template #dateNotSetBlock><span class="badge badge-warning">No due date</span></ng-template>
+
+          <div class="btn-group-vertical">
+            <button (click)="editCard(card.node.id)" class="btn btn-primary" type="button">Edit</button>
+            <button (click)="deleteCard(card.node.id)" class="btn btn-danger" type="button">Delete</button>
+
           </div>
-        </ng-container>
-      </div>
+        </div>
+      </ng-container>
+    </div>
 
-      </div>
+  </div>
 </ng-template>
 
