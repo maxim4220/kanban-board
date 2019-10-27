@@ -111,7 +111,7 @@ export class DynamicBoardComponent implements OnInit {
     }
   }
 
-  deleteCard(card_id) {
+  deleteCard(card_id, index) {
     this.apollo.mutate<any>({
       mutation: DELETE_CARD,
       variables: {
@@ -129,7 +129,7 @@ export class DynamicBoardComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         }).then(_ => {
-          return this.result.data.allCards.edges.splice(this.result.data.allCards.edges.findIndex(item => item.id == card_id), 1);
+          return this.result.data.allCards.edges.splice(index, 1);
         });
       } else {
         return this.errorMsg();

@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="grid-item ap-board">
-      <ng-container *ngFor="let card of result.data.allCards.edges">
+      <ng-container *ngFor="let card of result.data.allCards.edges; let i = index">
         <div [ngStyle]="{'border-top': card.node.labels && card.node.labels[0]?.color ? 'solid 5px '+card.node.labels[0].color : 'solid 3px ' + 'white'}" class="ap-card m-2 ">
           <h5 class="p-1">{{card.node.title}}</h5>
           <div class="ap-due-date">
@@ -37,7 +37,7 @@
             <a class="btn btn-info" href="https://app.pipefy.com/pipes/1093139#cards/{{card.node.id}}" target="_blank"
                type="button">View origin</a>
             <button (click)="editCard(card.node.id)" class="btn btn-primary" type="button">Edit</button>
-            <button (click)="deleteCard(card.node.id)" class="btn btn-danger" type="button">Delete</button>
+            <button (click)="deleteCard(card.node.id, i)" class="btn btn-danger" type="button">Delete</button>
           </div>
         </div>
       </ng-container>
