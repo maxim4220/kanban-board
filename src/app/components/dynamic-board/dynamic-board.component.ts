@@ -94,11 +94,11 @@ export class DynamicBoardComponent implements OnInit {
         }
       }).subscribe((response) => {
         if (response.data.createCard) {
-          this.successMsg();
-          const node = Object.assign({ node: response.data.createCard.card })
+          DynamicBoardComponent.successMsg();
+          const node = Object.assign({ node: response.data.createCard.card });
           this.result.data.allCards.edges.push(node);
         } else {
-          return this.errorMsg();
+          return DynamicBoardComponent.errorMsg();
         }
       });
     }
@@ -115,11 +115,11 @@ export class DynamicBoardComponent implements OnInit {
       }
     }).subscribe((response) => {
       if (response.data.deleteCard.success) {
-        this.successMsg();
+        DynamicBoardComponent.successMsg();
 
         return index ? this.result.data.allCards.edges.splice(index, 1) : this.result.data.allCards.edges.splice(-1,1);
       } else {
-        return this.errorMsg();
+        return DynamicBoardComponent.errorMsg();
       }
     });
   }
@@ -153,7 +153,7 @@ export class DynamicBoardComponent implements OnInit {
         }
       }).subscribe((response) => {
         if (response.data.updateCard) {
-          this.successMsg();
+          DynamicBoardComponent.successMsg();
           this.result.data.allCards.edges.some(element => {
             if(element.node.id == response.data.updateCard.card.id) {
               const node = Object.assign({ node: response.data.updateCard.card });
@@ -161,7 +161,7 @@ export class DynamicBoardComponent implements OnInit {
             }
           });
         } else {
-          return this.errorMsg();
+          return DynamicBoardComponent.errorMsg();
         }
       });
     }
@@ -238,7 +238,7 @@ organizations {
       });
   }
 
-  private errorMsg() {
+  private static errorMsg() {
     return from(swal.fire({
       position: 'center',
       type: 'error',
@@ -248,7 +248,7 @@ organizations {
     }));
   }
 
-  private successMsg() {
+  private static successMsg() {
     return from(swal.fire({
       position: 'center',
       type: 'success',
