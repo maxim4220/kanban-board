@@ -25,6 +25,7 @@ import { DynamicBoardComponent } from './components/dynamic-board/dynamic-board.
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TokenInterceptor } from './ interceptor/interceptor.service';
+import { MatCardModule } from '@angular/material/card'
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { TokenInterceptor } from './ interceptor/interceptor.service';
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
-    GraphQLModule
+    GraphQLModule,
+    MatCardModule
   ],
   providers: [
     //{provide: BrowserXhr, useClass:CustExtBrowserXhr},
