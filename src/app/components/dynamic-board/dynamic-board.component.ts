@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import swal from 'sweetalert2';
+import { from } from 'rxjs';
 
 const CREATE_CARD = gql`
 mutation createCard($input: CreateCardInput!) {
@@ -55,8 +56,6 @@ clientMutationId
 export class DynamicBoardComponent implements OnInit {
   public result;
   public loading = true;
-  private cardPriorities = ['black', 'rgb(137, 63, 227)',]
-
 
   constructor(private apollo: Apollo) {
   }
@@ -94,14 +93,8 @@ export class DynamicBoardComponent implements OnInit {
           }
         }
       }).subscribe((response) => {
-        if (response) {
-          swal.fire({
-            position: 'center',
-            type: 'success',
-            title: 'Your have Added the card',
-            showConfirmButton: false,
-            timer: 1500
-          });
+        if (response.data.createCard) {
+          this.successMsg();
           const node = Object.assign({ node: response.data.createCard.card })
           this.result.data.allCards.edges.push(node);
         } else {
@@ -122,15 +115,9 @@ export class DynamicBoardComponent implements OnInit {
       }
     }).subscribe((response) => {
       if (response.data.deleteCard.success) {
-        swal.fire({
-          position: 'center',
-          type: 'success',
-          title: 'Your have deleted the card!',
-          showConfirmButton: false,
-          timer: 1500
-        }).then(_ => {
-          return this.result.data.allCards.edges.splice(index, 1);
-        });
+        this.successMsg();
+
+        return index ? this.result.data.allCards.edges.splice(index, 1) : this.result.data.allCards.edges.splice(-1,1);
       } else {
         return this.errorMsg();
       }
@@ -165,14 +152,8 @@ export class DynamicBoardComponent implements OnInit {
           }
         }
       }).subscribe((response) => {
-        if (response) {
-          swal.fire({
-            position: 'center',
-            type: 'success',
-            title: 'Your have changed the card',
-            showConfirmButton: false,
-            timer: 1500
-          });
+        if (response.data.updateCard) {
+          this.successMsg();
           this.result.data.allCards.edges.some(element => {
             if(element.node.id == response.data.updateCard.card.id) {
               const node = Object.assign({ node: response.data.updateCard.card });
@@ -258,13 +239,23 @@ organizations {
   }
 
   private errorMsg() {
-    return swal.fire({
+    return from(swal.fire({
       position: 'center',
       type: 'error',
       title: 'Error has occured',
       showConfirmButton: false,
       timer: 1500
-    });
+    }));
+  }
+
+  private successMsg() {
+    return from(swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'Your operation is successful',
+      showConfirmButton: false,
+      timer: 1500
+    }));
   }
 
 }
